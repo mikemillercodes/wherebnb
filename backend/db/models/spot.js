@@ -30,8 +30,24 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     country: DataTypes.STRING,
-    lat: DataTypes.DECIMAL,
-    lng: DataTypes.DECIMAL,
+    lat: {
+      type: DataTypes.DECIMAL,
+      validate: {
+        hasSevenDecimals(value) {
+          let arr = value.split('.');
+          if (arr[1].length !== 7) throw new Error ('There must be 7 decimals for a valid latitude/longtitude coordinate')
+        }
+      }
+    },
+    lng: {
+      type: DataTypes.DECIMAL,
+      validate: {
+        hasSevenDecimals(value) {
+          let arr = value.split('.');
+          if (arr[1].length !== 7) throw new Error ('There must be 7 decimals for a valid latitude/longtitude coordinate')
+        }
+      }
+    },
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     price: DataTypes.DECIMAL
