@@ -40,19 +40,15 @@ router.post(
     validateSignup,
     async (req, res, next) => {
 
-      // const existingUsernames = await User.findAll({
-      //   attributes: ['username'],
-      //   raw: true
-      // })
-
-      // const existingEmails = await User.findAll({
-      //   attributes: ['email'],
-      //   raw: true
-      // })
       const { username, email, firstName, lastName, password } = req.body;
 
       try {
-        const user = await User.signup({ username, email, firstName, lastName, password });
+        let user = await User.signup({ username, email, firstName, lastName, password });
+        user = user.toJSON()
+        delete user.createdAt
+        delete user.updatedAt
+        user.token = ''
+        
         res.json(user)
       } catch(e) {
         e.errors.forEach(error => {
@@ -66,34 +62,10 @@ router.post(
         })
         next(e)
       }
-
-      // for (let obj of existingUsernames) {
-      //   if (req.body.username == obj.username) {
-      //     return res.status(403).json({
-      //       message: "User already exists",
-      //       statusCode: 403,
-      //       errors: {
-      //         username: "User with that username already exists"
-      //       }
-      //     })
-      //   }
-      // }
-
-      // for (let obj of existingEmails) {
-      //   if (req.body.email = obj.email) {
-      //     return res.status(403).json({
-      //       message: 'User already exists',
-      //       statusCode: 403,
-      //       errors: {
-      //         email: "User with that email already exists"
-      //       }
-      //     })
-      //   }
-      // }
-
   
       await setTokenCookie(res, user);
   
+      
       return res.json({
         user
       });
