@@ -47,6 +47,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         include: [
             {
                 model: User,
+                as: 'Owner',
                 attributes: []
             },
             {
@@ -91,6 +92,7 @@ router.get('/:spotId', async (req, res, next) => {
     let spotId = req.params.spotId
 
     const spot = await Spot.findByPk(spotId, {
+
         include: [
             {
                 model: Review,
@@ -124,5 +126,39 @@ router.get('/:spotId', async (req, res, next) => {
         next(error)
     }
 })
+
+// Create a Spot
+router.post('/', requireAuth, async (req, res, next) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body
+    const newSpot = await Spot.create({
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+    })
+    const newestSpot = await Spot.findAll({
+        limit: 1,
+        order: [[ 'createdAt', 'DESC']],
+      })
+      res.statusCode = 201
+    res.json(newestSpot.pop())
+})
+
+// Add an Image to a Spot based on the Spot'd id
+// router.post('/:spotId/images', requireAuth, async (req, res, next) => {
+//     const { url, preview } = req.body
+
+//     const newImage = await Spot.create({
+//         url,
+//         preview
+//     })
+
+//     res.json(newImage)
+// })
 
 module.exports = router;
