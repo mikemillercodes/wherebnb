@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       references: {
         model: "Reviews",
-        // key: "id"
+        key: "id"
       }
     },
     url: DataTypes.STRING
