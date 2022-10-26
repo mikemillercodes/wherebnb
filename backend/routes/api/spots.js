@@ -72,7 +72,8 @@ router.get('/current', requireAuth, async (req, res, next) => {
                 [Sequelize.fn('ROUND', Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 1), 'avgRating'],
                 [Sequelize.col('SpotImages.url'), 'previewImage']
             ]
-        }
+        },
+        group: ['Spot.id', 'previewImage']
     })
 
     res.json({
