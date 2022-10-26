@@ -32,7 +32,7 @@ router.get('/', async (req, res, next) => {
                 [ Sequelize.col('SpotImages.url'), 'previewImage']
             ]
         },
-        group: ['Spot.id']
+        group: ['Spot.id', 'SpotImage.url']
     })
     return res.json({
         "Spots": spots
