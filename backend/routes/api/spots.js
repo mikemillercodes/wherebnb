@@ -7,6 +7,7 @@ const router = express.Router();
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const spot = require('../../db/models/spot');
 
 // Get all Spots
 router.get('/', async (req, res, next) => {
@@ -68,19 +69,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
         },
         attributes: {
             include: [
-                [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating'],
+                [Sequelize.fn('ROUND', Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 1), 'avgRating'],
                 [Sequelize.col('SpotImages.url'), 'previewImage']
             ]
         }
     })
-
-    // let spots = []
-    // for (let spot of ownedSpots) {
-    //     spot = spot.toJSON()
-    //     delete spot.createdAt
-    //     delete spot.updatedAt
-    //     spots.push(spot)
-    // }
 
     res.json({
         'Spots': ownedSpots // spots
@@ -142,10 +135,10 @@ const validateNewSpot = [
         .withMessage('Country is required'),
     check('lat')
         .exists({ checkFalsy: true })
-        .withMessage('Latitude is required'),
+        .withMessage('Latitude is not valid'),
     check('lng')
         .exists({ checkFalsy: true })
-        .withMessage('Longitude is required'),
+        .withMessage('Longitude is not valid'),
     check('name')
         .exists({ checkFalsy: true })
         .isLength({ max: 50 })
@@ -161,7 +154,9 @@ const validateNewSpot = [
 // Create a Spot
 router.post('/', validateNewSpot, requireAuth, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
+    const { user } = req
     const newSpot = await Spot.create({
+        ownerId: user.id,
         address,
         city,
         state,
@@ -181,15 +176,38 @@ router.post('/', validateNewSpot, requireAuth, async (req, res, next) => {
 })
 
 // Add an Image to a Spot based on the Spot'd id
-// router.post('/:spotId/images', requireAuth, async (req, res, next) => {
-//     const { url, preview } = req.body
+router.post('/:spotId/images', requireAuth, async (req, res, next) => {
+    const { url, preview } = req.body
+    const { user } = req
+    const { spotId } = req.params
 
-//     const newImage = await Spot.create({
-//         url,
-//         preview
-//     })
+    const spot = await Spot.findByPk(spotId)
 
-//     res.json(newImage)
-// })
+    if (spot && spot.ownerId !== user.id) {
+        const error = new Error("Unauthorized")
+        error.status = 401;
+        next(error)
+    }
+ 
+    if (spot) {
+        let newImage = await SpotImage.create({
+            spotId,
+            url,
+            preview
+        })
+        res.json({
+            id: newImage.id,
+            url: newImage.url,
+            preview: newImage.preview
+        })
+    } else {
+        const error = new Error("Spot couldn't be found")
+        error.status = 404;
+        next(error)
+    }
+    
+
+    res.json(newImage)
+})
 
 module.exports = router;
