@@ -28,7 +28,7 @@ router.get('/', async (req, res, next) => {
         ],
         attributes: {
             include: [
-                [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating'],
+                [Sequelize.fn('ROUND', Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 1), 'avgRating'],
                 [Sequelize.col('SpotImages.url'), 'previewImage']
             ]
         },
@@ -299,14 +299,24 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, ne
             statusCode: 404
         })
     }
-    // loop through all reviews for the spot
+
     const allReviews = await Review.findAll({
         where: {
             spotId: spot.id
         }
     })
 
-    console.log(allReviews)
+    for (let i = 0; i < allReviews.length; i++) {
+        let review = allReviews[i]
+        if (review.userId === user.id) {
+            res.status(403).json({
+                message: "User already has a review for this spot",
+                statusCode: 403
+            })
+        }
+    }
+
+
 
     const newReview = await Review.create({
         userId: user.id,
