@@ -64,11 +64,24 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
     for (let review of allUserReviews) {
         review = review.toJSON()
+        let spot = review.Spot
 
-        let spot = review.spot
+        let spotImage = await SpotImage.findOne({
+            where: {
+                spotId: spot.id,
+                preview: true
+            }
+        })
+        spot.previewImage = spotImage.url
+        delete spot.description
+        delete spot.createdAt
+        delete spot.updatedAt
+        delete review.Spot
+        review.Spot = spot
+        result.push(review)
     }
 
-    res.json({ Reviews: allUserReviews })
+    res.json({ Reviews: result })
 })
 
 
