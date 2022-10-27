@@ -58,7 +58,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         where: {
             userId
         },
-        group: ['Review.id', 'User.id']
+        group: ['Review.id', 'User.id', 'ReviewImages.id']
     })
 
     const result = []
