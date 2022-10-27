@@ -8,9 +8,33 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const spot = require('../../db/models/spot');
+// router.get('/', async (req, res, next) => {
+
+    
+    
+    //     const spots = await Spot.findAll({
+        //         // attributes: {
+            //         //     exclude: ['avgRating']
+            //         // },
+            //         ...pagination
+//     })
+
+//     res.json(spots)
+
+
+// })
 
 // Get all Spots
 router.get('/', async (req, res, next) => {
+    let { page, size } = req.query
+    if (!page) page = 1
+    if (!size) size = 20
+    
+    let pagination = {}
+    if (parseInt(page) >= 1 && parseInt(size) >= 1) {
+            pagination.limit = size
+            pagination.offset = size * (page - 1)
+        }
 
     const spots = await Spot.findAll({
         include: [
@@ -33,7 +57,9 @@ router.get('/', async (req, res, next) => {
                 [Sequelize.col('SpotImages.url'), 'previewImage']
             ]
         },
-        group: ['Spot.id', 'SpotImages.url']
+        group: ['Spot.id', 'SpotImages.url'],
+        ...pagination,
+        subQuery: false
     })
     return res.json({
         "Spots": spots
@@ -484,7 +510,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
     }
 })
 
-
+// Add Query Filters to Get All Spots
 
 module.exports = router;
 

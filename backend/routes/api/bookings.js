@@ -50,4 +50,45 @@ router.get('/current', requireAuth, async (req, res, next) => {
     res.json({ Bookings: userBookings })
 })
 
+// Edit a Booking
+router.put('/:bookingId', requireAuth, async (req, res, next) => {
+    const { bookingId } = req.params
+    const { startDate, endDate } = req.body
+    const { user } = req
+
+
+    const booking = await Booking.findByPk(bookingId)
+
+    if (!booking) {
+        res.status(404).json({
+            message: "Booking couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    await booking.update({ startDate, endDate })
+
+    res.json(booking)
+})
+
+// Delete a Booking
+router.delete('/:bookingId', requireAuth, async (req, res, next) => {
+    const { bookingId } = req.params
+
+    const booking = await Booking.findByPk(bookingId)
+
+    if (!booking) {
+        res.status(404).json({
+            message: "Booking couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    await booking.destroy()
+    res.status(200).json({
+        message: "Successfully deleted",
+        statusCode: 200
+    })
+})
+
 module.exports = router;
