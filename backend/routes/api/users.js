@@ -7,6 +7,7 @@ const router = express.Router();
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const user = require('../../db/models/user');
 
 const validateSignup = [
     check('email')
@@ -42,14 +43,16 @@ router.post(
 
       const { username, email, firstName, lastName, password } = req.body;
 
+      
       try {
         let user = await User.signup({ username, email, firstName, lastName, password });
-        user = user.toJSON()
-        delete user.createdAt
-        delete user.updatedAt
-        user.token = ''
-        
-        res.json(user)
+        // user = user.toJSON()
+        // delete user.createdAt
+        // delete user.updatedAt
+        // user.token = token
+        const token = setTokenCookie(res, user);
+
+        return res.json({...user.toSafeObject(), token })
       } catch(e) {
         e.errors.forEach(error => {
           if (error.type === 'unique violation') {
@@ -62,13 +65,6 @@ router.post(
         })
         next(e)
       }
-  
-      await setTokenCookie(res, user);
-  
-      
-      return res.json({
-        user
-      });
     }
   );
 

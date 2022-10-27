@@ -118,13 +118,7 @@ router.put('/:reviewId', validateReview, requireAuth, async (req, res, next) => 
         })
     }
 
-    _review.update(
-        { id: id },
-        { userId: userId },
-        { spotId: spotId },
-        { review: review },
-        { stars: stars }
-    )
+    await _review.update({ review, stars })
 
     res.json(_review)
 })
