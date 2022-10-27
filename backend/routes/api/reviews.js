@@ -8,6 +8,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const reviewimage = require('../../db/models/reviewimage');
+const spot = require('../../db/models/spot');
 
 // Add an Image to a Review based on the Review's id
 router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
@@ -82,6 +83,77 @@ router.get('/current', requireAuth, async (req, res, next) => {
     }
 
     res.json({ Reviews: result })
+})
+
+const validateReview = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .withMessage('Review text is required'),
+    handleValidationErrors
+]
+
+// Edit a Review
+router.put('/:reviewId', validateReview, requireAuth, async (req, res, next) => {
+    const { reviewId } = req.params
+    const { user } = req
+    const { id, userId, spotId, review, stars } = req.body
+
+    const _review = await Review.findByPk(reviewId)
+
+    if (_review && _review.userId !== user.id) {
+        const error = new Error('Unauthorized')
+        error.status = 401;
+        next(error)
+    }
+
+    if (!_review) {
+        const error = new Error("Review couldn't be found")
+        error.status = 404;
+        next(error)
+    }
+
+    if (stars < 1 || stars > 5 || isNaN(stars)) {
+        res.json({
+            stars: 'Stars must be an integer from 1 to 5'
+        })
+    }
+
+    _review.update(
+        { id: id },
+        { userId: userId },
+        { spotId: spotId },
+        { review: review },
+        { stars: stars }
+    )
+
+    res.json(_review)
+})
+
+// Delete a review
+router.delete('/:reviewId', requireAuth, async (req, res, next) => {
+    const { reviewId } = req.params
+    const { user } = req
+
+    const review = await Review.findByPk(reviewId)
+
+    if (!review) {
+        res.status(404).json({
+            message: "Review couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    if (review.userId !== user.id) {
+        const error = new Error("Review must belong to current user")
+        error.status = 401;
+        next(error)
+    }
+
+    await review.destroy()
+    res.status(200).json({
+        message: "Successfully deleted",
+        statusCode: 200
+    })
 })
 
 

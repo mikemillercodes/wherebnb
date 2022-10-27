@@ -354,14 +354,15 @@ router.get('/:spotId/reviews', async (req, res, next) => {
         ],
         where: {
             spotId
-        },
-        group: ['Review.id']
+        }
     })
 
+    console.log('reviews: ', reviews)
 
     let result = []
     for (let review of reviews) {
         review = review.toJSON()
+        console.log(review)
         result.push(review)
     }
 
