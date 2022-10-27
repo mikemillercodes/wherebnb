@@ -443,17 +443,48 @@ router.post('/:spotId/bookings', handleValidationErrors, requireAuth, async (req
         startDate,
         endDate
     })
-
-    // console.log(spot.Bookings.startDate)
-
     res.json(booking)
 })
 
+// Get all Bookings for a Spot based on the Spot's id
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    const { spotId } = req.params
+    const { user } = req
+
+    const spot = await Spot.findByPk(spotId)
+
+    if (!spot) {
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    if (spot.ownerId === user.id) {
+        const bookings = await Booking.findAll({
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName'] 
+                }
+            ],
+            where: {
+                spotId
+            }
+        })
+        res.json({ Bookings: bookings })
+    } else if (spot.ownerId !== user.id) {
+        const bookings = await Booking.findAll({
+            where: {
+                spotId
+            },
+            attributes: ['spotId', 'startDate', 'endDate']
+        })
+        res.json({ Bookings: bookings })
+    }
+})
+
+
+
 module.exports = router;
 
-// const newReview = await Review.create({
-//     userId: user.id,
-//     spotId: spot.id,
-//     review,
-//     stars,
-// })
