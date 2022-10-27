@@ -51,7 +51,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
                 attributes: ['id', 'url']
             },
             {
-                model: Spot, // exclude description, createdAt, updatedAt
+                model: Spot, 
             }
         ],
         where: {
