@@ -62,7 +62,9 @@ router.get('/', async (req, res, next) => {
         subQuery: false
     })
     return res.json({
-        "Spots": spots
+        "Spots": spots,
+        "Page": page,
+        "Size": size
     })
 })
 
@@ -253,16 +255,17 @@ router.put('/:spotId', validateSpot, requireAuth, async (req, res, next) => {
 
     if (spot) {
         spot.update(
-            { address: address },
-            { city: city },
-            { state: state },
-            { country: country },
-            { lat: lat },
-            { lng: lng },
-            { name: name },
-            { description: description },
-            { price: price },
-            { where: spotId }
+            { address: address,
+            city: city,
+            state: state,
+            country: country,
+            lat: lat,
+            lng: lng,
+            name: name,
+            description: description,
+            price: price,
+            // where: spotId
+         }
         )
         res.json(spot)
     } else {

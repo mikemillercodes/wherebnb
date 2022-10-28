@@ -112,7 +112,7 @@ router.put('/:reviewId', validateReview, requireAuth, async (req, res, next) => 
         next(error)
     }
 
-    if (stars < 1 || stars > 5 || isNaN(stars)) {
+    if (stars < 1 || stars > 5) {
         res.json({
             stars: 'Stars must be an integer from 1 to 5'
         })
