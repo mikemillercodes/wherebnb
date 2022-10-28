@@ -79,7 +79,8 @@ router.get('/current', requireAuth, async (req, res, next) => {
         delete spot.updatedAt
         delete review.Spot
         review.Spot = spot
-        result.push(review)
+
+        if (review.userId === userId) result.push(review)
     }
 
     res.json({ Reviews: result })

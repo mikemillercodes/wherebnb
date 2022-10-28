@@ -8,23 +8,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const spot = require('../../db/models/spot');
-// router.get('/', async (req, res, next) => {
 
-    
-    
-    //     const spots = await Spot.findAll({
-        //         // attributes: {
-            //         //     exclude: ['avgRating']
-            //         // },
-            //         ...pagination
-//     })
-
-//     res.json(spots)
-
-
-// })
-
-// Get all Spots
 router.get('/', async (req, res, next) => {
     let { page, size } = req.query
     if (!page) page = 1
@@ -134,7 +118,7 @@ router.get('/:spotId', async (req, res, next) => {
         attributes: {
             include: [
                 [Sequelize.fn('COUNT', Sequelize.col('Reviews.id')), 'numReviews'],
-                [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating'],
+                [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating'],
             ]
         },
         group: ['SpotImages.id', 'Spot.id', 'Owner.id']
