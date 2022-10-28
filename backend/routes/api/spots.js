@@ -47,8 +47,8 @@ router.get('/', async (req, res, next) => {
     })
     return res.json({
         "Spots": spots,
-        "Page": page,
-        "Size": size
+        "page": page,
+        "size": size
     })
 })
 
@@ -307,7 +307,7 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, ne
 
     if (!spot) {
         res.status(404)
-        res.json({
+        return res.json({
             message: "Spot couldn't be found",
             statusCode: 404
         })
@@ -322,7 +322,7 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, ne
     for (let i = 0; i < allReviews.length; i++) {
         let review = allReviews[i]
         if (review.userId === user.id) {
-            res.status(403).json({
+            return res.status(403).json({
                 message: "User already has a review for this spot",
                 statusCode: 403
             })
