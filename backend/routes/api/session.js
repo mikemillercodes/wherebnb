@@ -27,12 +27,6 @@ router.post(
       const { credential, password } = req.body;
   
       let user = await User.login({ credential, password });
-      console.log("///////", user)
-      
-      // user = user.toJSON()
-      // delete user.createdAt
-      // delete user.updatedAt
-      // user.token = token
         
       if (!user) {
         // const err = new Error('Invalid credentials');
@@ -45,7 +39,8 @@ router.post(
       const token = setTokenCookie(res, user)
       // await setTokenCookie(res, user);
   
-      return res.json({...user.toSafeObject(), token});
+      return res.json({
+        user: user.toSafeObject()});
     }
   );
 
@@ -65,8 +60,11 @@ router.get(
   (req, res) => {
     const { user } = req;
     if (user) {
-      return res.json(user.toSafeObject());
-    } else return res.json({});
+      return res.json({
+        user: user.toSafeObject()});
+    } else return res.json({
+      user: null
+    });
   }
 );
 

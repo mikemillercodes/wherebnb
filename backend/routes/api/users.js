@@ -52,7 +52,7 @@ router.post(
         // user.token = token
         const token = setTokenCookie(res, user);
 
-        return res.json({...user.toSafeObject(), token })
+        return res.json({user: user.toSafeObject()})
       } catch(e) {
         e.errors.forEach(error => {
           if (error.type === 'unique violation') {
