@@ -6,7 +6,7 @@ import * as sessionActions from "./store/session";
 import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
 import LandPage from './components/LandPage';
-
+import OneSpot from "./components/Spots/OneSpotIndex";
 
 
 
@@ -24,6 +24,9 @@ function App() {
         <Switch>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route exact path='/spots/:id'>
+            <OneSpot />
           </Route>
         </Switch>
       )}
