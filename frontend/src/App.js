@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
+
+import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
+import LandPage from './components/LandPage';
+
+
+
 
 function App() {
   const dispatch = useDispatch();

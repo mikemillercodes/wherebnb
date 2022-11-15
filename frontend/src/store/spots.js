@@ -1,25 +1,24 @@
-import spot from "../../../backend/db/models/spot"
 import { csrfFetch } from "./csrf"
 
 // * Actions (types) *
-const GET_SPOTS = 'spots/getAllSpots'
-const CREATE_SPOT = 'spots/createNew'
-const CREATE_SPOT_IMAGE = 'spots/createImage'
-const UPDATE_SPOT = 'spots/update'
-const DELETE_SPOT = 'spots/delete'
+const GET_SPOTS = '/spots/getAllSpots'
+const CREATE_SPOT = '/spots/createNew'
+const CREATE_SPOT_IMAGE = '/spots/createImage'
+const UPDATE_SPOT = '/spots/update'
+const DELETE_SPOT = '/spots/delete'
 
 // * Actions (creators) *
-export const getSpots = (spots) => {
+export const getSpots = (data) => {
     return {
         type: GET_SPOTS,
-        spots
+        spots: data
     }
 }
 
-export const createSpot = (spot) => {
+export const createSpot = (data) => {
     return {
         type: CREATE_SPOT,
-        spot
+        data
     } 
 }
 
@@ -52,7 +51,7 @@ export const getSpotsThunk = () => async dispatch => {
 
     if (response.ok) {
         const allSpots = await response.json()
-        dispatch(getSpots(spots))
+        dispatch(getSpots(allSpots))
         return allSpots
     }
 }
@@ -68,7 +67,7 @@ export const createSpotThunk = (payload) => async dispatch => {
 
     if (response.ok) {
         const spot = await response.json()
-        dispatch(addSpot(spot))
+        dispatch(createSpot(spot))
         return spot
     }
 }
@@ -106,6 +105,7 @@ export const createSpotImgThunk = (spot, payload) => async dispatch => {
     }
 }
 
+/* ------ SELECTORS ------ */
 export const getSpotById = (id) => (state) => state.spots[id]
 export const getAllSpots = (state) => Object.values(state.spots)
 const initialState = {}
@@ -117,6 +117,7 @@ const spotReducer = (state = initialState, action) => {
             const allSpots = {}
 
             for (let i = 0; i < action.spots.Spots.length; i++) {
+                let spot = action.spots.Spots[i]
                 allSpots[spot.id] = spot
             }
             return { ...state, ...allSpots }
