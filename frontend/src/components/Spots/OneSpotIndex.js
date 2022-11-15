@@ -19,10 +19,12 @@ const OneSpot = () => {
 
     if (!oneSpot) return null;
     
+    // add styling to image
     return (
         <div>
             <h1>{oneSpot.name}</h1>
-            <img style={{ width: 500 }} src={oneSpot.previewImage} alt={oneSpot.name} />
+            <img src={oneSpot.previewImage} alt={oneSpot.name} />
+
             <h2>
                 {oneSpot.address},
                 {oneSpot.city},
