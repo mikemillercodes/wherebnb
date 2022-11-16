@@ -6,10 +6,8 @@ import * as sessionActions from "./store/session";
 import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
 import LandPage from './components/LandPage';
-import OneSpot from "./components/Spots/Index";
-import EditSpot from "./components/EditSpot";
-
-
+import OneSpot from "./components/Spots/index";
+import EditSpot from "./components/EditSpot/index";
 
 function App() {
   const dispatch = useDispatch();

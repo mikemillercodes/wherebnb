@@ -116,6 +116,7 @@ export const createSpotImgThunk = (spot, payload) => async dispatch => {
 
 /* ------ SELECTORS ------ */
 export const getAllSpots = (state) => Object.values(state.spots)
+export const getOneSpot = (spotId) => (state) => state.spots[spotId]
 const initialState = {}
 
 // Spot Reducer

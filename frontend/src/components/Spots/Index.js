@@ -1,16 +1,17 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-
-// selectors
+import { useHistory, useParams } from 'react-router-dom';
 import { getOneSpotThunk } from '../../store/spots';
 // CSS (to-do)
 import './OneSpotDesign.css'
 
-const OneSpot = ({ spots }) => {
+const OneSpot = () => {
     const { spotId } = useParams()
     const dispatch = useDispatch()
     const oneSpot = useSelector(state => state.spots[spotId])
+    console.log("One Spot :", oneSpot)
+
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(getOneSpotThunk(spotId))
@@ -20,6 +21,9 @@ const OneSpot = ({ spots }) => {
 
     return (
         <div className='outer-div'>
+            <button onClick={() => {
+                history.push(`/spots/${spotId}/edit`)
+            }}>Edit Spot</button>
             <div className='spot-images'>
 
             </div>
