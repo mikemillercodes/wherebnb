@@ -2,7 +2,6 @@ import './spotDesign.css';
 import { Link } from 'react-router-dom';
 
 const SpotDesign = ({ spot }) => {
-    console.log('Spot Prop', spot)
     return (
         <Link to={`spots/${spot.id}`}>
             <div className='spot-top'>

@@ -6,7 +6,8 @@ import * as sessionActions from "./store/session";
 import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
 import LandPage from './components/LandPage';
-import OneSpot from "./components/Spots/OneSpotIndex";
+import OneSpot from "./components/Spots/Index";
+import EditSpot from "./components/EditSpot";
 
 
 
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route exact path='/spots/:spotId'>
             <OneSpot />
+          </Route>
+          <Route exact path='/spots/:spotId/edit'>
+            <EditSpot />
           </Route>
           <Route>Page Not Found</Route>
         </Switch>

@@ -45,7 +45,6 @@ export const deleteSpot = (spot) => {
 }
 
 // THUNKS
-
 export const getSpotsThunk = () => async dispatch => {
     const response = await csrfFetch('/api/spots')
     if (response.ok) {
@@ -116,7 +115,6 @@ export const createSpotImgThunk = (spot, payload) => async dispatch => {
 }
 
 /* ------ SELECTORS ------ */
-export const getSpotById = (id, state) => state.spots[id]
 export const getAllSpots = (state) => Object.values(state.spots)
 const initialState = {}
 

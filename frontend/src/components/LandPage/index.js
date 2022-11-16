@@ -12,7 +12,6 @@ const LandPage = () => {
     }, [dispatch])
 
     const spots = useSelector(state => state)
-    console.log('Spots: ', spots)
     let spotArr;
     if (Object.values(spots).length) {
         spotArr = getAllSpots(spots)
