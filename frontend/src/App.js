@@ -25,9 +25,13 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route exact path='/spots/:id'>
+          <Route exact path='/'>
+            <LandPage />
+          </Route>
+          <Route exact path='/spots/:spotId'>
             <OneSpot />
           </Route>
+          <Route>Page Not Found</Route>
         </Switch>
       )}
     </>

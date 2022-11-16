@@ -3,18 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 // selectors
-import { getAllSpots, getSpotById } from '../../store/spots';
+import { getAllSpots, getOneSpotThunk, getSpotById } from '../../store/spots';
 // CSS (to-do)
 import './OneSpotDesign.css'
 
 const OneSpot = () => {
-    const { id } = useParams()
+    const { spotId } = useParams()
     const dispatch = useDispatch()
-    const oneSpot = useSelector(getSpotById(id))
+    const oneSpot = useSelector(getSpotById(spotId))
     console.log('One Spot: ', oneSpot)
 
     useEffect(() => {
-        dispatch(getAllSpots())
+        dispatch(getOneSpotThunk(spotId))
     }, [dispatch])
 
     if (!oneSpot) return null;

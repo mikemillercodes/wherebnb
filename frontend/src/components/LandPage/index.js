@@ -1,26 +1,27 @@
-import { getAllSpots } from "../../store/spots";
+import { getAllSpots, getSpotsThunk } from "../../store/spots";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import './LandPage.css'
+import './spotDesign/spotDesign.css'
+import '../../index.css'
 import SpotDesign from "./spotDesign/spotDesign";
 
 const LandPage = () => {
     const dispatch = useDispatch()
     useEffect (() => {
-        dispatch(getAllSpots());
-    }, [])
+        dispatch(getSpotsThunk());
+    }, [dispatch])
 
-    const spots = useSelector(state => state.spots.getAllSpots)
+    const spots = useSelector(state => state)
     console.log('Spots: ', spots)
-
-    let spotArr = []
-    for (let i = 0; i < getAllSpots.length; i++) {
-        let spot = getAllSpots[i]
-        spotArr.push(getAllSpots[spot]);
+    let spotArr;
+    if (Object.values(spots).length) {
+        spotArr = getAllSpots(spots)
     }
 
+    if (!spotArr.length) return null;
+
     return (
-        <div>
+        <div className="all-spots">
             {spotArr.map(spot => (
                 <SpotDesign key={spot.id} spot={spot}/>
             ))

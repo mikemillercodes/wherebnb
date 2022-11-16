@@ -1,0 +1,53 @@
+.spot-top {
+    /* preview image, name */
+}
+
+.all-spots {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: 'Roboto', 'Sans Serif';
+    width: 85%;
+    justify-content: center;
+}
+
+.land-image {
+    height: 255px;
+    width: 242px;
+    border-radius: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.spot-name {
+    text-decoration: none;
+    color: black;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.location-text {
+    /* city, state */
+    font-weight: bold;
+    text-decoration: none;
+    color:black;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.spot-price {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.avg-rating {
+    text-align: right;
+}
+
+a {
+    text-decoration: none;
+    width: fit-content;
+    height: fit-content;
+}

@@ -47,17 +47,27 @@ export const deleteSpot = (spot) => {
 // THUNKS
 
 export const getSpotsThunk = () => async dispatch => {
-    const response = await csrfFetch('api/spots')
-
+    const response = await csrfFetch('/api/spots')
     if (response.ok) {
         const allSpots = await response.json()
+        console.log("All Spots: ", allSpots)
         dispatch(getSpots(allSpots))
         return allSpots
     }
 }
 
+export const getOneSpotThunk = (spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}`)
+    if (response.ok) {
+        const spot = await response.json()
+        dispatch(getSpots(spot))
+        return spot
+    }
+}
+
+
 export const createSpotThunk = (payload) => async dispatch => {
-    const response = await csrfFetch('api/spots', {
+    const response = await csrfFetch('/api/spots', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -106,7 +116,7 @@ export const createSpotImgThunk = (spot, payload) => async dispatch => {
 }
 
 /* ------ SELECTORS ------ */
-export const getSpotById = (id) => (state) => state.spots[id]
+export const getSpotById = (id, state) => state.spots[id]
 export const getAllSpots = (state) => Object.values(state.spots)
 const initialState = {}
 
