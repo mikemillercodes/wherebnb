@@ -1,5 +1,6 @@
-.spot-top {
-    /* preview image, name */
+.entire-landpage {
+    /* display: flex;
+    flex-wrap: wrap; */
 }
 
 .all-spots {
@@ -8,14 +9,15 @@
     font-family: 'Roboto', 'Sans Serif';
     width: 85%;
     justify-content: center;
+    align-items: center;
 }
 
 .land-image {
-    height: 255px;
-    width: 242px;
+    height: 325px;
+    width: 325px;
     border-radius: 16px;
     margin-left: 10px;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .spot-name {
@@ -23,10 +25,13 @@
     color: black;
     margin-left: 10px;
     margin-right: 10px;
+    opacity: 60%;
 }
 
-.location-text {
+.location-stars {
     /* city, state */
+    display: flex;
+    justify-content: space-between;
     font-weight: bold;
     text-decoration: none;
     color:black;
@@ -35,19 +40,32 @@
 }
 
 .spot-price {
-    font-weight: bold;
     text-decoration: none;
     color: black;
     margin-left: 10px;
     margin-right: 10px;
+    /* opacity: 65%; */
 }
 
 .avg-rating {
     text-align: right;
+    text-decoration: none;
+    margin-right: 20px;
 }
 
 a {
     text-decoration: none;
     width: fit-content;
     height: fit-content;
+}
+
+.spot-bottom {
+    display: flex;
+    align-items: left;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.night {
+    text-decoration: none;
 }

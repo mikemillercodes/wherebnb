@@ -2,10 +2,8 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { createSpotThunk } from "../../store/spots";
-import { useEffect } from "react";
 // import './editSpot.css'
 
 const CreateSpot = () => {

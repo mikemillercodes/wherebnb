@@ -7,12 +7,17 @@ import './Navigation.css';
 import LoginForm from '../LoginFormModal/LoginForm'
 import SignupFormPage from '../SignupFormPage';
 import { Modal } from '../../context/Modal'
+import { useHistory } from 'react-router-dom'
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
   const [showModal, setShowModal] = useState(false)
   const [login, setLogin] = useState(true)
-
+  const history = useHistory()
+  
+  const redirectHome = () => {
+    history.push('/')
+  }
 //   let sessionLinks;
 //   if (sessionUser) {
 //     sessionLinks = (
@@ -30,7 +35,10 @@ function Navigation({ isLoaded }){
   return (
     <ul>
       <li>
-        <NavLink exact to="/">Home</NavLink>
+        <div className='Home'>
+        <button id='redir-home' onClick={() => redirectHome()}>Home</button>
+        {/* </button>exact to="/">Home</NavLink> */}
+        </div>
         {isLoaded && ( <ProfileButton 
         user={sessionUser} 
         setLogin={setLogin} 

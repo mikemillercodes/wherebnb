@@ -11,7 +11,6 @@ const OneSpot = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const oneSpot = useSelector(state => state.spots[spotId])
-    console.log("One Spot :", oneSpot)
 
     const history = useHistory()
 
@@ -52,7 +51,7 @@ const OneSpot = () => {
             </h2>
             <h2>
             </h2>
-                ${oneSpot.price}
+                {`${oneSpot.price} night`}
             <p>
                 {oneSpot.description}
             </p>
