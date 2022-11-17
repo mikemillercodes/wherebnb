@@ -9,16 +9,17 @@ const DELETE_SPOT = '/spots/delete'
 
 // * Actions (creators) *
 export const getSpots = (data) => {
+    debugger
     return {
         type: GET_SPOTS,
         spots: data
     }
 }
 
-export const createSpot = (data) => {
+export const createSpot = (spot) => {
     return {
         type: CREATE_SPOT,
-        data
+        spot
     } 
 }
 
@@ -30,17 +31,18 @@ export const createSpotImg = (image, spot) => {
     }
 }
 
-export const updateSpot = (spot) => {
+export const updateSpot = (spot, previewImage) => {
     return {
         type: UPDATE_SPOT,
-        spot
+        spot,
+        previewImage
     }
 }
 
-export const deleteSpot = (spot) => {
+export const deleteSpot = (spotId) => {
     return {
         type: DELETE_SPOT,
-        spot
+        spotId
     }
 }
 
@@ -49,7 +51,7 @@ export const getSpotsThunk = () => async dispatch => {
     const response = await csrfFetch('/api/spots')
     if (response.ok) {
         const allSpots = await response.json()
-        console.log("All Spots: ", allSpots)
+        debugger
         dispatch(getSpots(allSpots))
         return allSpots
     }
@@ -59,7 +61,7 @@ export const getOneSpotThunk = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}`)
     if (response.ok) {
         const spot = await response.json()
-        dispatch(getSpots(spot))
+        // dispatch(getSpots(spot))
         return spot
     }
 }
@@ -75,12 +77,12 @@ export const createSpotThunk = (payload) => async dispatch => {
     })
 
     if (response.ok) {
+        debugger
         const spot = await response.json()
         dispatch(createSpot(spot))
         return spot
     }
 }
-
 export const editSpotThunk = (spot, payload) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spot.id}`, {
         method: 'PUT',
@@ -96,6 +98,23 @@ export const editSpotThunk = (spot, payload) => async dispatch => {
         return editedSpot
     }
 }
+
+export const deleteSpotThunk = (spotId, payload) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        // body: JSON.stringify(payload)
+    })
+
+    if (response.ok) {
+        dispatch(deleteSpot(spotId))
+        return true
+    } else return false;
+}
+
+
 
 
 export const createSpotImgThunk = (spot, payload) => async dispatch => {
@@ -115,16 +134,21 @@ export const createSpotImgThunk = (spot, payload) => async dispatch => {
 }
 
 /* ------ SELECTORS ------ */
-export const getAllSpots = (state) => Object.values(state.spots)
+export const getAllSpots = (state) => {
+    debugger
+    return Object.values(state.spots)
+}
+
 export const getOneSpot = (spotId) => (state) => state.spots[spotId]
 const initialState = {}
 
 // Spot Reducer
 const spotReducer = (state = initialState, action) => {
+    debugger
     switch (action.type) {
         case GET_SPOTS:
+            debugger
             const allSpots = {}
-
             for (let i = 0; i < action.spots.Spots.length; i++) {
                 let spot = action.spots.Spots[i]
                 allSpots[spot.id] = spot
@@ -135,6 +159,7 @@ const spotReducer = (state = initialState, action) => {
             return { ...state, [action.spot.id]: { ...action.spot, previewImage: action.image.url } }
         
         case CREATE_SPOT:
+            debugger
             return { 
                 ...state, 
                 [action.spot.id]: { ...action.spot }
@@ -143,7 +168,7 @@ const spotReducer = (state = initialState, action) => {
         case UPDATE_SPOT:
             return {
                 ...state,
-                [action.spot.id]: { ...action.spot, previewImage: action.image}
+                [action.spot.id]: { ...action.spot, previewImage: action.previewImage}
             }
         case DELETE_SPOT:
             const stateCopy = { ...state }

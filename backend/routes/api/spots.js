@@ -12,7 +12,7 @@ const spot = require('../../db/models/spot');
 router.get('/', async (req, res, next) => {
     let { page, size } = req.query
     if (!page) page = 1
-    if (!size) size = 20
+    if (!size) size = 30
     
     let pagination = {}
     if (parseInt(page) >= 1 && parseInt(size) >= 1) {
@@ -251,7 +251,7 @@ router.put('/:spotId', validateSpot, requireAuth, async (req, res, next) => {
             // where: spotId
          }
         )
-        res.json(spot)
+        return res.json(spot)
     } else {
         const error = new Error("Spot couldn't be found")
         error.status = 404;

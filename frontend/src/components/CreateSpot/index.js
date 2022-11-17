@@ -1,28 +1,29 @@
+// CREATE A SPOT, NOT EDIT
+
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { editSpotThunk } from "../../store/spots";
+import { createSpotThunk } from "../../store/spots";
 import { useEffect } from "react";
-import './editSpot.css'
+// import './editSpot.css'
 
-const EditSpot = () => {
-    const { spotId } = useParams()
+const CreateSpot = () => {
     const dispatch = useDispatch()
-    const spot = useSelector(state => state.spots[spotId])
     const history = useHistory()
 
     // useEffect(() => {
     //     dispatch(editSpotThunk(spot))
     // }, [dispatch, spot])
 
-    const [address, setAddress] = useState(spot.address)
-    const [city, setCity] = useState(spot.city)
-    const [state, setState] = useState(spot.state)
-    const [country, setCountry] = useState(spot.country)
-    const [name, setName] = useState(spot.name)
-    const [description, setDescription] = useState(spot.description)
-    const [price, setPrice] = useState(spot.price)
+    const [address, setAddress] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
+    const [country, setCountry] = useState('')
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [price, setPrice] = useState('')
+    const [previewImage, setPreviewImage] = useState('')
     // previewImage
     const [errors, setErrors] = useState([])
 
@@ -41,21 +42,19 @@ const EditSpot = () => {
             price,
         }
 
-        let editedSpot;
-
-        editedSpot = await dispatch(editSpotThunk(spot, payload))
-        // use createSpot thunk for create
-        if (editedSpot) history.push(`/spots/${spotId}`)
+        let newSpot = await dispatch(createSpotThunk(payload))
+        debugger
+        if (newSpot) history.push(`/spots/${newSpot.id}`)
     }
 
     return (
-        <div className="edit-spot-page">
+        <div className="new-spot-page">
             <div className="outer">
-                <span className="Form Title">Update Spot Details</span>
+                <span className="Form Title">New Spot Details</span>
             </div>
             <div className="form area">
 
-                <form className="edit-spot-form" onSubmit={handleSubmit}>
+                <form className="new-spot-form" onSubmit={handleSubmit}>
                     {!!errors.length && <ul>
                         {errors.map((error, index) => (
                             <li className="all-errors" key={index}>{error}</li>
@@ -111,7 +110,8 @@ const EditSpot = () => {
                         placeholder='Price'
                         required
                     />
-                    <button className="submit-edit" type="submit">Update Details</button>
+
+                    <button className="submit-edit" type="submit">Create New Spot</button>
                 </form>
             </div>
         </div>
@@ -120,4 +120,4 @@ const EditSpot = () => {
 
 }
 
-export default EditSpot;
+export default CreateSpot;
