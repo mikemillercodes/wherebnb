@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const SpotDesign = ({ spot }) => {
     return (
-        <Link to={`spots/${spot.id}`}>
+        <Link className='outer-link' to={`spots/${spot.id}`}>
             <script src="https://kit.fontawesome.com/fb97bfcf0f.js" crossorigin="anonymous"></script>
             <div className='entire-landpage'>
                 <div className='spot-top'>

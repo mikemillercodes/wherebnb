@@ -1,15 +1,18 @@
-.entire-landpage {
+.outer-link {
     /* display: flex;
     flex-wrap: wrap; */
+    /* background-color: blue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .all-spots {
     display: flex;
     flex-wrap: wrap;
     font-family: 'Roboto', 'Sans Serif';
-    width: 85%;
+    width: 100%;
     justify-content: center;
-    align-items: center;
 }
 
 .land-image {
@@ -17,7 +20,7 @@
     width: 325px;
     border-radius: 16px;
     margin-left: 10px;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .spot-name {
