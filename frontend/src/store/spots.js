@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf"
 
 // * Actions (types) *
 const GET_SPOTS = '/spots/getAllSpots'
+const GET_SINGLE_SPOT = '/spots/singleSpot'
 const CREATE_SPOT = '/spots/createNew'
 const UPDATE_SPOT = '/spots/update'
 const DELETE_SPOT = '/spots/delete'
@@ -14,11 +15,18 @@ export const getSpots = (data) => {
     }
 }
 
+export const getSingleSpot = (spot) => {
+    return {
+        type: GET_SINGLE_SPOT,
+        spot
+    }
+}
+
 export const createSpot = (spot) => {
     return {
         type: CREATE_SPOT,
         spot
-    } 
+    }
 }
 
 export const updateSpot = (spot, previewImage) => {
@@ -50,7 +58,8 @@ export const getOneSpotThunk = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}`)
     if (response.ok) {
         const spot = await response.json()
-        // dispatch(getSpots(spot))
+        console.log('thunk spot: ', spot)
+        dispatch(getSingleSpot(spot))
         return spot
     }
 }
@@ -109,11 +118,12 @@ export const getAllSpots = (state) => {
 export const getOneSpot = (spotId) => (state) => state.spots[spotId]
 const initialState = {}
 
-// Spot Reducer
+// All Spots Reducer
 const spotReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_SPOTS:
             const allSpots = {}
+            console.log("action.spots: ", action.spots)
             for (let i = 0; i < action.spots.Spots.length; i++) {
                 let spot = action.spots.Spots[i]
                 allSpots[spot.id] = spot
@@ -121,21 +131,37 @@ const spotReducer = (state = initialState, action) => {
             return { ...state, ...allSpots }
 
         case CREATE_SPOT:
-            return { 
-                ...state, 
+            return {
+                ...state,
                 [action.spot.id]: { ...action.spot }
             }
 
         case UPDATE_SPOT:
             return {
                 ...state,
-                [action.spot.id]: { ...action.spot, previewImage: action.previewImage}
+                [action.spot.id]: { ...action.spot, previewImage: action.previewImage }
             }
         case DELETE_SPOT:
             const stateCopy = { ...state }
             delete stateCopy[action.spotId]
             return stateCopy
-            default: return state
+        default: return state
+    }
+}
+
+
+// Single Spot Reducer
+
+export const singleSpotReducer = (state = {}, action) => {
+    switch(action.type) {
+        case GET_SINGLE_SPOT: {
+            const newState = {...state};
+            newState[action.spot.id] = action.spot
+        return newState
+        }
+        default: {
+            return state
+        }
     }
 }
 

@@ -16,8 +16,8 @@
 }
 
 .land-image {
-    height: 325px;
-    width: 325px;
+    height: 242px;
+    width: 255px;
     border-radius: 16px;
     margin-left: 10px;
     margin-right: 10px;
@@ -29,6 +29,7 @@
     margin-left: 10px;
     margin-right: 10px;
     opacity: 60%;
+    font-size: 10pt;
 }
 
 .location-stars {
@@ -40,6 +41,8 @@
     color:black;
     margin-left: 10px;
     margin-right: 10px;
+    margin-top: 4px;
+    font-size: 10pt;
 }
 
 .spot-price {
@@ -47,13 +50,16 @@
     color: black;
     margin-left: 10px;
     margin-right: 10px;
+    font-size: 10pt;
+    font-weight: bolder;
     /* opacity: 65%; */
 }
 
 .avg-rating {
     text-align: right;
     text-decoration: none;
-    margin-right: 20px;
+    margin-right: 5px;
+    font-size: 10pt;
 }
 
 a {
@@ -67,6 +73,7 @@ a {
     align-items: left;
     text-decoration: none;
     margin-bottom: 20px;
+
 }
 
 .night {

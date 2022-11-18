@@ -1,0 +1,43 @@
+.outer-div {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.spot-image1 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.spot-image2 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+.spot-images {
+  display: grid;
+  height: 100%;
+  width: 500px;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: dense;
+  gap: 7px;
+
+}
+  .spot-images > :first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+    border-bottom-left-radius: 9px;
+    border-top-left-radius: 9px;
+  }
+
+  .spot-images > :nth-child(3) {
+    border-top-right-radius: 10px;
+  }
+
+  .spot-images > :nth-child(5) {
+    border-bottom-right-radius: 10px;
+  }
+

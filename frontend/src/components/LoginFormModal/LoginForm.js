@@ -9,7 +9,7 @@ function LoginForm({ setShowModal }) {
   const [errors, setErrors] = useState([]);
 
   const handleDemo = (e) => {
-    setCredential('demo@gmail')
+    setCredential('demo@user.io')
     setPassword('password')
   }
 

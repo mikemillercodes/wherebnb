@@ -2,7 +2,7 @@ import { getAllSpots, getSpotsThunk } from "../../store/spots";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import './spotDesign/spotDesign.css'
-import '../../index.css'
+// import '../../index.css'
 import SpotDesign from "./spotDesign/spotDesign";
 
 const LandPage = () => {

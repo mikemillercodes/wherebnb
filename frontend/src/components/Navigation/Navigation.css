@@ -21,7 +21,7 @@ a {
 
 .logo {
     display: block;
-    width: 150px;
+    width: 120px;
 }
 
 .navigation-bar-left{
@@ -43,8 +43,8 @@ a {
     display: flex;
     opacity: 70%;
     border-radius: 40px;
-    height: 70px;
-    width: 150px;
+    height: 60px;
+    width: 120px;
     align-items: center;
     justify-content: center;
 }
@@ -52,11 +52,13 @@ a {
 .menu-items {
     height: 50px;
     width: 50px;
+    margin-left: 10px;
 }
 
 .profile-icon {
     height: 50px;
     width: 50px;
+    margin-right: 5px;
 }
 
 #redir-create-spot {
@@ -64,7 +66,7 @@ a {
     flex-wrap: wrap;
     border: none;
     background-color: white;
-    font-size: 23px;
+    font-size: 19px;
 
 }
 

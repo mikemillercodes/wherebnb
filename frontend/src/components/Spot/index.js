@@ -10,7 +10,7 @@ const OneSpot = () => {
     const { spotId } = useParams()
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
-    const oneSpot = useSelector(state => state.spots[spotId])
+    const oneSpot = useSelector(state => state.singleSpot[spotId])
 
     const history = useHistory()
 
@@ -20,22 +20,30 @@ const OneSpot = () => {
 
     if (!oneSpot) return null;
 
+    const nonPreviewImage = oneSpot.SpotImages.filter(image => image.preview === false);
+    const nonPreviewImages2 = nonPreviewImage.slice(0, 4);
+
+    const previewImage = oneSpot.SpotImages.find(image => image.preview === true);
+
     return (
         <div className='outer-div'>
 
-            {user.id === oneSpot.ownerId && <button onClick={() => {
+            {user && user.id === oneSpot.ownerId && <button onClick={() => {
                 history.push(`/spots/${spotId}/edit`)
             }}>Edit Spot</button>}
 
-            {user.id === oneSpot.ownerId && <button onClick={() => {
-                if (dispatch(deleteSpotThunk(spotId)) === true) {
-                    history.push(`/`)
-                }
+            {user && user.id === oneSpot.ownerId && <button onClick={() => {
+                const deleteDispatch = dispatch(deleteSpotThunk(spotId))
+                if (deleteDispatch) history.push(`/`);
             }}>Delete Spot</button>}
-            <div className='spot-images'>
 
+            <div className='spot-images'>
+                <img class='spot-image1' src={previewImage.url} alt={oneSpot.name} />
+
+                {nonPreviewImages2.map(image =>
+                    <img class='spot-image2' src={image.url} alt={oneSpot.name} />
+                )}
             </div>
-            <img style={{ width: 600 }} src={oneSpot.previewImage} />
             <div className='spot-details'>
                 <h1>{oneSpot.name}</h1>
             </div>
@@ -51,7 +59,7 @@ const OneSpot = () => {
             </h2>
             <h2>
             </h2>
-                {`${oneSpot.price} night`}
+            {`${oneSpot.price} night`}
             <p>
                 {oneSpot.description}
             </p>
