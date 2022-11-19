@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { editSpotThunk } from "../../store/spots";
-import { useEffect } from "react";
 import './editSpot.css'
 
 const EditSpot = () => {
@@ -16,13 +15,13 @@ const EditSpot = () => {
     //     dispatch(editSpotThunk(spot))
     // }, [dispatch, spot])
 
-    const [address, setAddress] = useState(spot.address)
-    const [city, setCity] = useState(spot.city)
-    const [state, setState] = useState(spot.state)
-    const [country, setCountry] = useState(spot.country)
-    const [name, setName] = useState(spot.name)
-    const [description, setDescription] = useState(spot.description)
-    const [price, setPrice] = useState(spot.price)
+    const [address, setAddress] = useState(spot ? spot.address : '')
+    const [city, setCity] = useState(spot ? spot.city : '')
+    const [state, setState] = useState(spot ? spot.state : '')
+    const [country, setCountry] = useState(spot ? spot.country : '')
+    const [name, setName] = useState(spot ? spot.name : '')
+    const [description, setDescription] = useState(spot ? spot.description : '')
+    const [price, setPrice] = useState(spot ? spot.price : '')
     // previewImage
     const [errors, setErrors] = useState([])
 

@@ -1,18 +1,14 @@
 // CREATE A SPOT, NOT EDIT
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { createSpotThunk } from "../../store/spots";
+import { createSpotImageThunk, createSpotThunk } from "../../store/spots";
 // import './editSpot.css'
 
 const CreateSpot = () => {
     const dispatch = useDispatch()
     const history = useHistory()
-
-    // useEffect(() => {
-    //     dispatch(editSpotThunk(spot))
-    // }, [dispatch, spot])
 
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
@@ -21,8 +17,7 @@ const CreateSpot = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
-    const [previewImage, setPreviewImage] = useState('')
-    // previewImage
+    const [previewImageUrl, setPreviewImageUrl] = useState('')
     const [errors, setErrors] = useState([])
 
     const handleSubmit = async (e) => {
@@ -40,9 +35,21 @@ const CreateSpot = () => {
             price,
         }
 
-        let newSpot = await dispatch(createSpotThunk(payload))
-        debugger
-        if (newSpot) history.push(`/spots/${newSpot.id}`)
+        let createdSpot = await dispatch(createSpotThunk(payload))
+        .catch(async (res) => {
+            const fetchData = await res.json()
+            if (fetchData && fetchData.errors) setErrors(fetchData.errors)
+        })
+
+        if (createdSpot && previewImageUrl) {
+            const previewImagePayload = {
+                url: previewImageUrl,
+                preview: true
+            }
+            await dispatch(createSpotImageThunk(previewImagePayload, createdSpot))
+        }
+
+        if (createdSpot) history.push(`/spots/${createdSpot.id}`)
     }
 
     return (
@@ -101,12 +108,20 @@ const CreateSpot = () => {
                         placeholder='Description'
                         required
                     />
-                    <input type="text"
+                    <input type="number"
                         className="price"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                         placeholder='Price'
                         required
+                    />
+                    <input 
+                    type='url'
+                    className="preview-image"
+                    placeholder="Input Preview Image URL"
+                    value={previewImageUrl}
+                    onChange={(e) => setPreviewImageUrl(e.target.value)}
+                    required
                     />
 
                     <button className="submit-edit" type="submit">Create New Spot</button>

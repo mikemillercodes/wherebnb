@@ -1,4 +1,7 @@
 import { csrfFetch } from "./csrf"
+import { useParams } from "react-router-dom"
+
+
 
 // * Actions (types) *
 const GET_REVIEWS = '/reviews/getAllreviews'
@@ -7,7 +10,7 @@ const CREATE_REVIEW = '/reviews/createNew'
 const DELETE_REVIEW = '/reviews/delete'
 
 // * Actions (creators) *
-export const getreviews = (data) => {
+export const getReviews = (data) => {
     return {
         type: GET_REVIEWS,
         reviews: data
@@ -21,10 +24,11 @@ export const getSingleReview = (review) => {
     }
 }
 
-export const createReview = (review) => {
+export const createReview = (review, spotId) => {
     return {
         type: CREATE_REVIEW,
-        review
+        review,
+        spotId
     }
 }
 
@@ -36,12 +40,12 @@ export const deleteReview = (reviewId) => {
 }
 
 // THUNKS
-export const getreviewsThunk = () => async dispatch => {
-    const response = await csrfFetch('/api/reviews')
+export const getSpotReviewsThunk = (spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
     if (response.ok) {
-        const allreviews = await response.json()
-        dispatch(getreviews(allreviews))
-        return allreviews
+        const spotReviews = await response.json()
+        dispatch(getReviews(spotReviews))
+        return spotReviews
     }
 }
 
@@ -55,20 +59,24 @@ export const getOneReviewThunk = (reviewId) => async dispatch => {
 }
 
 
-export const createReviewThunk = (payload) => async dispatch => {
-    const response = await csrfFetch('/api/reviews', {
+export const createReviewThunk = (payload, spotId) => async dispatch => {
+
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
     })
-
     if (response.ok) {
         const review = await response.json()
         dispatch(createReview(review))
         return review
+    } else { 
+        const { message } = await response.json()
+        return message
     }
+
 }
 
 export const deleteReviewThunk = (reviewId, payload) => async dispatch => {
@@ -97,12 +105,12 @@ const initialState = {}
 const reviewReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_REVIEWS:
-            const allreviews = {}
-            for (let i = 0; i < action.reviews.reviews.length; i++) {
-                let review = action.reviews.reviews[i]
-                allreviews[review.id] = review
+            const reviews = {}
+            for (let i = 0; i < action.reviews.Reviews.length; i++) {
+                let review = action.reviews.Reviews[i]
+                reviews[review.id] = review
             }
-            return { ...state, ...allreviews }
+            return { ...state, ...reviews }
 
         case CREATE_REVIEW:
             return {

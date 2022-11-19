@@ -179,9 +179,21 @@ router.post('/', validateSpot, requireAuth, async (req, res, next) => {
         description,
         price
     })
+
+    // const newSpotImg = await SpotImage.create({
+    //     url: 'https://media-exp1.licdn.com/dms/image/C4E03AQGAHBLTEuJWOg/profile-displayphoto-shrink_800_800/0/1622233841281?e=1674086400&v=beta&t=W2PeXh8VUdLnBNIH0INZ8J8gzUclN6vmxEkM_zx1vVY',
+    //     preview: true
+    // })
+
     const newestSpot = await Spot.findAll({
         limit: 1,
         order: [['createdAt', 'DESC']],
+        // include: [
+        //     { 
+        //         model: SpotImage,
+        //         attributes: ['url']
+        //     },
+        // ],
     })
     res.statusCode = 201
     res.json(newestSpot.pop())
@@ -324,7 +336,10 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, ne
         if (review.userId === user.id) {
             return res.status(403).json({
                 message: "User already has a review for this spot",
-                statusCode: 403
+                statusCode: 403,
+                errors: [
+                    "User already has a review for this spot"
+                ]
             })
         }
     }

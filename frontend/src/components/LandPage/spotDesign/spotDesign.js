@@ -1,7 +1,7 @@
 import './spotDesign.css';
 import { Link } from 'react-router-dom';
 
-const SpotDesign = ({ spot }) => {
+const SpotDesign = ({spot}) => {
     return (
         <Link className='outer-link' to={`spots/${spot.id}`}>
             <script src="https://kit.fontawesome.com/fb97bfcf0f.js" crossorigin="anonymous"></script>

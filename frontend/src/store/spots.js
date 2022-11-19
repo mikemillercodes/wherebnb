@@ -6,12 +6,21 @@ const GET_SINGLE_SPOT = '/spots/singleSpot'
 const CREATE_SPOT = '/spots/createNew'
 const UPDATE_SPOT = '/spots/update'
 const DELETE_SPOT = '/spots/delete'
+const ADD_SPOT_IMAGE = '/spots/addImage'
 
 // * Actions (creators) *
 export const getSpots = (data) => {
     return {
         type: GET_SPOTS,
         spots: data
+    }
+}
+
+export const addSpotImage = (image, spot) => {
+    return {
+        type: ADD_SPOT_IMAGE,
+        image,
+        spot
     }
 }
 
@@ -80,6 +89,25 @@ export const createSpotThunk = (payload) => async dispatch => {
         return spot
     }
 }
+
+export const createSpotImageThunk = (payload, spot) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spot.id}/images`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+
+    if (response.ok) {
+        const newImage = await response.json()
+        dispatch(addSpotImage(newImage, spot))
+        return newImage
+    }
+}
+
+
+
 export const editSpotThunk = (spot, payload) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spot.id}`, {
         method: 'PUT',
@@ -123,7 +151,6 @@ const spotReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_SPOTS:
             const allSpots = {}
-            console.log("action.spots: ", action.spots)
             for (let i = 0; i < action.spots.Spots.length; i++) {
                 let spot = action.spots.Spots[i]
                 allSpots[spot.id] = spot
@@ -133,13 +160,26 @@ const spotReducer = (state = initialState, action) => {
         case CREATE_SPOT:
             return {
                 ...state,
-                [action.spot.id]: { ...action.spot }
+                [action.spot.id]: { 
+                    ...action.spot 
+                }
             }
 
         case UPDATE_SPOT:
             return {
                 ...state,
-                [action.spot.id]: { ...action.spot, previewImage: action.previewImage }
+                [action.spot.id]: { 
+                    ...action.spot, 
+                    previewImage: action.previewImage }
+            }
+
+        case ADD_SPOT_IMAGE:
+            return {
+                ...state,
+                [action.spot.id]: { 
+                    ...action.spot, 
+                    previewImage: action.image.url
+                }
             }
         case DELETE_SPOT:
             const stateCopy = { ...state }

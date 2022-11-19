@@ -9,7 +9,7 @@ import LandPage from './components/LandPage';
 import OneSpot from "./components/Spot/index";
 import EditSpot from "./components/EditSpot/index";
 import CreateSpot from "./components/CreateSpot";
-import Reviews from "./components/Reviews";
+import CreateReview from "./components/CreateReview";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,13 +31,15 @@ function App() {
           </Route>
           <Route exact path='/spots/:spotId'>
             <OneSpot />
-            <Reviews />
           </Route>
           <Route exact path='/spots/:spotId/edit'>
             <EditSpot />
           </Route>
           <Route exact path = '/createnewspot'>
             <CreateSpot />
+          </Route>
+          <Route exact path = '/spots/:spotId/reviewyourstay'>
+            <CreateReview />
           </Route>
           <Route>Page Not Found</Route>
         </Switch>

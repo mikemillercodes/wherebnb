@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { getOneSpotThunk } from '../../store/spots';
 import { deleteSpotThunk } from '../../store/spots';
+import SpotReviews from '../Reviews';
+import CreateReview from '../CreateReview';
 // CSS (to-do)
 import './OneSpotDesign.css'
 
@@ -37,12 +39,13 @@ const OneSpot = () => {
                 if (deleteDispatch) history.push(`/`);
             }}>Delete Spot</button>}
 
+
             <div className='spot-images'>
                 <img class='spot-image1' src={previewImage.url} alt={oneSpot.name} />
 
                 {nonPreviewImages2.map(image =>
                     <img class='spot-image2' src={image.url} alt={oneSpot.name} />
-                )}
+                    )}
             </div>
             <div className='spot-details'>
                 <h1>{oneSpot.name}</h1>
@@ -63,6 +66,10 @@ const OneSpot = () => {
             <p>
                 {oneSpot.description}
             </p>
+            <SpotReviews spot={oneSpot}/>
+                    {user && user.id !== oneSpot.ownerId && <button onClick={() => {
+                        history.push(`/spots/${spotId}/reviewyourstay`)
+                    }}>Review Your Stay</button>}
         </div>
     )
 }
