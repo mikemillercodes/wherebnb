@@ -1,12 +1,10 @@
 // CREATE A SPOT, NOT EDIT
 
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createReviewThunk } from "../../store/reviews";
 import { useParams } from "react-router-dom";
-import { getOneSpot } from "../../store/spots";
-import SpotReviews from "../Reviews/index"
 // import './editReview.css'
 
 const CreateReview = () => {
@@ -18,16 +16,11 @@ const CreateReview = () => {
     const [stars, setStars] = useState(1)
     const [errors, setErrors] = useState([])
 
-    const activeSpot = useSelector(getOneSpot(spotId))
     const user = useSelector(state => state.session.user)
 
-    const reviews = useSelector(state => state.reviews)
-
     const handleSubmit = async (e) => {
-        console.log('handle submit')
         e.preventDefault()
         const payload = { review, stars }
-        console.log('payload: ', payload)
         let newReview = await dispatch(createReviewThunk(payload, spotId))
         
         .catch(async (response) => {

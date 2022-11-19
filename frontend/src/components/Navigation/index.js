@@ -40,7 +40,7 @@ function Navigation({ isLoaded }) {
       <div className='navigation-bar-left'>
         <div className='Home'>
           <div className='home-button'>
-            <button id='redir-home' onClick={() => redirectHome()}><img className='logo' src='https://1000logos.net/wp-content/uploads/2017/08/Airbnb-Logo.png'></img></button>
+            <button id='redir-home' onClick={() => redirectHome()}><img className='logo' alt='alt' src='https://1000logos.net/wp-content/uploads/2017/08/Airbnb-Logo.png'></img></button>
           </div>
         </div>
         <div className='become-host-button'>

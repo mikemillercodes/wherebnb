@@ -4,7 +4,6 @@ import { useHistory, useParams } from 'react-router-dom';
 import { getOneSpotThunk } from '../../store/spots';
 import { deleteSpotThunk } from '../../store/spots';
 import SpotReviews from '../Reviews';
-import CreateReview from '../CreateReview';
 // CSS (to-do)
 import './OneSpotDesign.css'
 
@@ -70,6 +69,7 @@ const OneSpot = () => {
                     {user && user.id !== oneSpot.ownerId && <button onClick={() => {
                         history.push(`/spots/${spotId}/reviewyourstay`)
                     }}>Review Your Stay</button>}
+                    
         </div>
     )
 }
