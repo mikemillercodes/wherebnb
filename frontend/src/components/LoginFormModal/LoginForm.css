@@ -1,0 +1,61 @@
+#login-button {
+    background-color: rgb(255,90,95);
+    border: none;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    height: 35px;
+    /* width: 250px; */
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+#demo-user-button {
+    background-color: rgb(255,90,95);
+    border: none;
+    color: white;
+    height: 35px;
+    /* width: 250px; */
+    border-radius: 16px;
+    cursor: pointer;
+    margin-bottom: 35px;
+    font-size: 13px;
+
+}
+
+#nav-login {
+    background-color: rgb(255,90,95);
+    border: none;
+    color: white;   
+    font-family: 'Roboto';
+}
+
+.username-email {
+    width: 150px;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid grey;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    font-family: 'Roboto';
+    height: 12px;
+    font-size: 13px;
+}
+
+.password {
+    width: 150px;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid grey;
+    margin-top: 5px;
+    margin-left: 68px;
+    font-family: 'Roboto';
+    height: 12px;
+}
+
+.username-email-label, .password-label {
+    font-family: 'Roboto';
+    font-size: 13px;
+}

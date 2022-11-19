@@ -36,58 +36,61 @@ function SignupFormPage({ setShowModal }) {
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <label>
+      <div className="signup-form">
+
+      <label className="email-label">
         Email
-        <input
+        <input className="email"
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
       </label>
-      <label>
+      <label className="username-label">
         Username
-        <input
+        <input className="username"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
       </label>
-      <label>
+      <label className="firstname-label">
         First Name
-        <input 
+        <input className="firstname"
                   type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
               /></label>
-          <label>
+          <label className="lastname-label">
               Last Name
-              <input
+              <input className="lastname"
                   type="text"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
               />
           </label>
-          <label>
+          <label className="password-label">
               Password
-              <input
+              <input className="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
       </label>
-      <label>
+      <label className="confirmpassword-label">
         Confirm Password
-        <input
+        <input className="confirmpassword"
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
       </label>
-      <button type="submit">Sign Up</button>
+      <button id='signup-button' type="submit">Sign Up</button>
+      </div>
     </form>
   );
 }

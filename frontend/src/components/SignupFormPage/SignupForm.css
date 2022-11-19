@@ -1,6 +1,129 @@
 form {
-    display: inline-flex;
+    display: flex;
     align-items: left;
     padding: 10px;
     align-items: left;
+    margin: auto;
+}
+
+.signup-form {
+    display: flex;
+    align-content: center;
+    justify-items: center;
+    flex-wrap: wrap;
+    margin: auto;
+    font-size: 13px;
+    font-family: 'Roboto';
+    margin-left: 18px;
+
+}
+
+.email {
+    width: 150px;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid grey;
+    margin-left: 91px;
+    font-family: 'Roboto';
+    font-size: 12px;
+    height: 12px;
+}
+
+.username {
+    width: 150px;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid grey;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 65px;
+    font-family: 'Roboto';
+    height: 12px;
+}
+
+.firstname {
+    width: 150px;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid grey;
+    margin-bottom: 5px;
+    margin-left: 61px;
+    font-family: 'Roboto';
+    height: 12px;
+
+}
+
+.lastname {
+    width: 150px;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid grey;
+    margin-left: 62px;
+    font-family: 'Roboto';
+    height: 12px;
+
+}
+
+.password {
+    width: 150px;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid grey;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    font-family: 'Roboto';
+    height: 12px;
+
+}
+
+.confirmpassword {
+    width: 150px;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid grey;
+    margin-bottom: 5px;
+    margin-left: 19px;
+    font-family: 'Roboto';
+    height: 12px;
+}
+
+#signup-button {
+    background-color: rgb(255,90,95);
+    border: none;
+    color: white;   
+    font-family: 'Roboto';
+    border-radius: 16px;
+    width: 290px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.email-label {
+    font-family: 'Roboto';
+    font-size: 13px;
+}
+
+.username-label {
+    font-family: 'Roboto';
+    font-size: 13px;
+}
+
+.firstname-label {
+    font-family: 'Roboto';
+    font-size: 13px;
+}
+
+.lastname-label {
+    font-family: 'Roboto';
+    font-size: 13px;
+}
+
+.password-label {
+    font-family: 'Roboto';
+    font-size: 13px;
+}
+
+.confirmpassword-label {
+    font-family: 'Roboto';
+    font-size: 13px;
 }
