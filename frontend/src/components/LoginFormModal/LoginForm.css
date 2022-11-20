@@ -9,25 +9,25 @@ form {
     color: white;
     margin-top: 10px;
     margin-bottom: 5px;
-    height: 35px;
+    height: 30px;
     /* width: 250px; */
     border-radius: 16px;
     cursor: pointer;
     font-size: 13px;
-    width: 150px;
+    width: 160px;
 }
 
 #demo-user-button {
     background-color: rgb(255,90,95);
     border: none;
     color: white;
-    height: 35px;
+    height: 30px;
     /* width: 250px; */
     border-radius: 16px;
     cursor: pointer;
     margin-bottom: 35px;
     font-size: 13px;
-    width: 150px;
+    width: 160px;
 }
 
 #nav-login {

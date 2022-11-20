@@ -335,7 +335,7 @@ router.post('/:spotId/reviews', validateReview, requireAuth, async (req, res, ne
         let review = allReviews[i]
         if (review.userId === user.id) {
             return res.status(403).json({
-                message: "User already has a review for this spot",
+                message: "You've already reviewed this spot!",
                 statusCode: 403,
                 errors: [
                     "User already has a review for this spot"
