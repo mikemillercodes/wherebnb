@@ -40,6 +40,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
         </div>
       </button>
       <div className="profile-dropdown2">
+
         {showMenu && (user ?
           (<ul className="profile-dropdown">
             <li>{user.username}</li>

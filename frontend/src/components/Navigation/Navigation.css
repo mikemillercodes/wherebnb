@@ -37,10 +37,7 @@ a {
 }
 
 .profile-dropdown {
-    border-radius: 16px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+    padding-right: 40px;
 }
 
 #menu-button {
@@ -103,7 +100,7 @@ a {
     width: 100px;
 }
 
-.profile-dropdown2 {
+.profile-dropdown {
     font-size: 14px;
     text-align: center;
     position: absolute;
