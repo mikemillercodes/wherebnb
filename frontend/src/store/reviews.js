@@ -70,7 +70,7 @@ export const createReviewThunk = (payload, spotId) => async dispatch => {
     })
     if (response.ok) {
         const review = await response.json()
-        dispatch(createReview(review))
+        dispatch(getSpotReviewsThunk(spotId))
         return review
     } else { 
         const { message } = await response.json()
@@ -79,7 +79,7 @@ export const createReviewThunk = (payload, spotId) => async dispatch => {
 
 }
 
-export const deleteReviewThunk = (reviewId, payload) => async dispatch => {
+export const deleteReviewThunk = (reviewId) => async dispatch => {
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE',
         headers: {

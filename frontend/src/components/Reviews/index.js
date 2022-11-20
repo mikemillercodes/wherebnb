@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getSpotReviewsThunk } from '../../store/reviews';
 import { deleteReviewThunk } from '../../store/reviews';
 import { useHistory, useParams } from 'react-router-dom';
-// CSS (to-do)
 import './ReviewsDesign.css'
 
 const SpotReviews = () => {
@@ -13,16 +12,23 @@ const SpotReviews = () => {
 
     const reviews = useSelector(state => Object.values(state.reviews))
     console.log('reviews: ', reviews)
-    const user = useSelector(state => state.session.user)
-
-    const spot = useSelector(state => state.spots[spotId])
-   
+    const user = useSelector(state => state.session.user)   
 
     let spotReviews = []
     for (let i = 0; i < reviews.length; i++) {
         let review = reviews[i]
         review.createdAt = new Date(review.createdAt).toLocaleDateString()
         if (review.spotId === +spotId) spotReviews.push(review)
+    }
+
+    console.log('spot reviews: ', spotReviews)
+
+    const userReviewedSpot = () => {
+        for (let i = 0; i < spotReviews.length; i++) {
+            let spotReview = spotReviews[i]
+            if (spotReview.userId === user.id) return spotReview.id
+        }
+        return false
     }
 
     useEffect(() => {
@@ -42,10 +48,10 @@ const SpotReviews = () => {
                     </>
                 ))}
             </div>
-            {/* {user && user.id === spot.ownerId && <button onClick={() => {
-                const deleteDispatch = dispatch(deleteReviewThunk(spotId))
+            {user && userReviewedSpot() && <button id='delete-review' onClick={() => {
+                const deleteDispatch = dispatch(deleteReviewThunk(userReviewedSpot()))
                 if (deleteDispatch) history.push(`/spots/${spotId}`);
-            }}>Delete Review</button>} */}
+            }}>Delete your review</button>}
 
            
         </div>

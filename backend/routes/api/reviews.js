@@ -97,7 +97,7 @@ const validateReview = [
 router.put('/:reviewId', validateReview, requireAuth, async (req, res, next) => {
     const { reviewId } = req.params
     const { user } = req
-    const { id, userId, spotId, review, stars } = req.body
+    const { review, stars } = req.body
 
     const _review = await Review.findByPk(reviewId)
 

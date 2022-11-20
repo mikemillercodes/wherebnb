@@ -1,0 +1,24 @@
+.review-owner {
+    font-size: 20px   
+}
+
+.review-date {
+    opacity: 50%
+}
+
+.review-text {
+    opacity: 80%;
+}
+
+#delete-review {
+    border-radius: 40px;
+    background-color: rgb(255, 90, 95);
+    border: none;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    height: 35px;
+    cursor: pointer;
+    font-size: 13px;
+    width: 150px;
+}

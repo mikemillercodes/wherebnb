@@ -1,9 +1,9 @@
 form {
     display: flex;
+    align-items: center;
+    padding: 100px;
     align-items: left;
-    padding: 10px;
-    align-items: left;
-    margin: auto;
+    /* margin-bottom: 15px; */
 }
 
 .signup-form {
@@ -13,7 +13,6 @@ form {
     flex-wrap: wrap;
     margin: auto;
     font-size: 13px;
-    font-family: 'Roboto';
     margin-left: 18px;
 
 }
@@ -23,8 +22,6 @@ form {
     padding: 5px;
     border-radius: 6px;
     border: 1px solid grey;
-    margin-left: 91px;
-    font-family: 'Roboto';
     font-size: 12px;
     height: 12px;
 }
@@ -36,8 +33,6 @@ form {
     border: 1px solid grey;
     margin-top: 5px;
     margin-bottom: 5px;
-    margin-left: 65px;
-    font-family: 'Roboto';
     height: 12px;
 }
 
@@ -47,8 +42,6 @@ form {
     border-radius: 6px;
     border: 1px solid grey;
     margin-bottom: 5px;
-    margin-left: 61px;
-    font-family: 'Roboto';
     height: 12px;
 
 }
@@ -58,8 +51,6 @@ form {
     padding: 5px;
     border-radius: 6px;
     border: 1px solid grey;
-    margin-left: 62px;
-    font-family: 'Roboto';
     height: 12px;
 
 }
@@ -70,10 +61,7 @@ form {
     border-radius: 6px;
     border: 1px solid grey;
     margin-bottom: 5px;
-    margin-left: 5px;
-    font-family: 'Roboto';
     height: 12px;
-
 }
 
 .confirmpassword {
@@ -82,8 +70,6 @@ form {
     border-radius: 6px;
     border: 1px solid grey;
     margin-bottom: 5px;
-    margin-left: 19px;
-    font-family: 'Roboto';
     height: 12px;
 }
 
@@ -91,39 +77,32 @@ form {
     background-color: rgb(255,90,95);
     border: none;
     color: white;   
-    font-family: 'Roboto';
     border-radius: 16px;
-    width: 290px;
+    width: 150px;
     height: 40px;
     margin-bottom: 10px;
 }
 
 .email-label {
-    font-family: 'Roboto';
     font-size: 13px;
 }
 
 .username-label {
-    font-family: 'Roboto';
     font-size: 13px;
 }
 
 .firstname-label {
-    font-family: 'Roboto';
     font-size: 13px;
 }
 
 .lastname-label {
-    font-family: 'Roboto';
     font-size: 13px;
 }
 
 .password-label {
-    font-family: 'Roboto';
     font-size: 13px;
 }
 
 .confirmpassword-label {
-    font-family: 'Roboto';
     font-size: 13px;
 }

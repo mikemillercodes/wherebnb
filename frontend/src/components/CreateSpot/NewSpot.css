@@ -1,11 +1,11 @@
-.edit-spot-page {
+.new-spot-page {
     margin-left: 40px;
     margin-right: 40px;
     align-items: center;
     text-align: center;
 }
 
-.address, .city, .state, .country, .name, .description {
+#input-address, #input-city, #input-state, #input-country, #input-name, #input-preview-img {
     border-radius: 16px;
     border: 1px solid grey;
     width: 350px;
@@ -14,7 +14,7 @@
     margin-bottom: 5px;
 }
 
-.price2 {
+#input-price {
     border-radius: 16px;
     border: 1px solid grey;
     width: 350px;
@@ -36,17 +36,17 @@
     margin-bottom: 5px;
 }
 
-.edit-form-title {
+.title {
     margin-bottom: -25px;
 }
 
-.submit-edit {
+.submit-new-spot {
     background-color: rgb(255,90,95);
     border: none;
     color: white;
     height: 40px;
     border-radius: 16px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 15px;
     width: 362px;
 }

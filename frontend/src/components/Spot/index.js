@@ -28,48 +28,59 @@ const OneSpot = () => {
 
     return (
         <div className='outer-div'>
-
-            {user && user.id === oneSpot.ownerId && <button onClick={() => {
-                history.push(`/spots/${spotId}/edit`)
-            }}>Edit Spot</button>}
-
-            {user && user.id === oneSpot.ownerId && <button onClick={() => {
-                const deleteDispatch = dispatch(deleteSpotThunk(spotId))
-                if (deleteDispatch) history.push(`/`);
-            }}>Delete Spot</button>}
-
-
-            <div className='spot-images'>
-                <img class='spot-image1' src={previewImage.url} alt={oneSpot.name} />
-
-                {nonPreviewImages2.map(image =>
-                    <img class='spot-image2' src={image.url} alt={oneSpot.name} />
-                    )}
-            </div>
             <div className='spot-details'>
-                <h1>{oneSpot.name}</h1>
+                <div className='spot-headline'>{oneSpot.name}</div>
+                <div className='review-data'>
+                    <i class='fa-sharp fa-solid fa-star'></i>{`${Math.round(oneSpot.avgStarRating)} `}
+                    ∙
+                    {` ${oneSpot.numReviews} reviews`}
+                    ∙
+                    {` ${oneSpot.city}, ${oneSpot.state}, ${oneSpot.country}`}
+
+                </div>
+                <div className='spot-images'>
+                    <div className='big-image'>
+                        <img className='spot-image1' src={previewImage.url} alt={oneSpot.name} />
+                    </div>
+                    {nonPreviewImages2.map(image =>
+                        <div className='small-images'>
+                            <img className='spot-image2' src={image.url} alt={oneSpot.name} />
+                        </div>
+                    )}
+                </div>
+                <div className='edit-delete-buttons'>
+                {user && user.id === oneSpot.ownerId && <button id='edit-spot' onClick={() => {
+                    history.push(`/spots/${spotId}/edit`)
+                }}>Edit your spot</button>}
+
+                {user && user.id === oneSpot.ownerId && <button id='delete-spot' onClick={() => {
+                    const deleteDispatch = dispatch(deleteSpotThunk(spotId))
+                    if (deleteDispatch) history.push(`/`);
+                }}>Delete your spot</button>}
+                </div>
+                <div className='entire-house'>
+                    {`Entire house hosted by ${oneSpot.Owner.firstName}`}
+                </div>
+                <div className='details'>
+                    10 guests ∙ 5 bedrooms ∙ 5 beds ∙ 3 baths
+                </div>
+                <div className='price'>
+                    {`$${oneSpot.price}`} <span style={{ opacity: 0.7 }}> night</span>
+                </div>
+                <div className='single-spot-reviews'>
+                    <div className='review-data2'>
+                        <i class='fa-sharp fa-solid fa-star'></i>{`${Math.round(oneSpot.avgStarRating)} `}
+                        ∙
+                        {` ${oneSpot.numReviews} reviews`}
+                        {user && user.id !== oneSpot.ownerId && <button id='review-your-stay' onClick={() => {
+                            history.push(`/spots/${spotId}/reviewyourstay`)
+                        }}>Review your stay</button>}
+                    </div>
+                    <SpotReviews spot={oneSpot} />
+                </div>
+
             </div>
 
-            <h2>
-                {oneSpot.address}
-            </h2>
-            <h2>
-                {oneSpot.city},
-            </h2>
-            <h2>
-                {oneSpot.state}, {oneSpot.country}
-            </h2>
-            <h2>
-            </h2>
-            {`${oneSpot.price} night`}
-            <p>
-                {oneSpot.description}
-            </p>
-            <SpotReviews spot={oneSpot}/>
-                    {user && user.id !== oneSpot.ownerId && <button onClick={() => {
-                        history.push(`/spots/${spotId}/reviewyourstay`)
-                    }}>Review Your Stay</button>}
-                    
         </div>
     )
 }

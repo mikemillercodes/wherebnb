@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createSpotImageThunk, createSpotThunk } from "../../store/spots";
-// import './editSpot.css'
+import './NewSpot.css'
 
 const CreateSpot = () => {
     const dispatch = useDispatch()
@@ -36,10 +36,10 @@ const CreateSpot = () => {
         }
 
         let createdSpot = await dispatch(createSpotThunk(payload))
-        .catch(async (res) => {
-            const fetchData = await res.json()
-            if (fetchData && fetchData.errors) setErrors(fetchData.errors)
-        })
+            .catch(async (res) => {
+                const fetchData = await res.json()
+                if (fetchData && fetchData.errors) setErrors(fetchData.errors)
+            })
 
         if (createdSpot && previewImageUrl) {
             const previewImagePayload = {
@@ -54,18 +54,17 @@ const CreateSpot = () => {
 
     return (
         <div className="new-spot-page">
-            <div className="outer">
-                <span className="Form Title">New Spot Details</span>
+            <div className="title">
+                Ready to Wherebnb it? Fill this out and let's get started.
             </div>
             <div className="form area">
-
                 <form className="new-spot-form" onSubmit={handleSubmit}>
                     {!!errors.length && <ul>
                         {errors.map((error, index) => (
                             <li className="all-errors" key={index}>{error}</li>
                         ))}
                     </ul>}
-                    <input type="text"
+                    <input id='input-address' type="text"
                         className="address"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
@@ -73,58 +72,58 @@ const CreateSpot = () => {
                         required
                     />
 
-                    <input type="text"
+                    <input id='input-city' type="text"
                         className="city"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                         placeholder='City'
                         required
                     />
-                    <input type="text"
+                    <input id='input-state' type="text"
                         className="state"
                         value={state}
                         onChange={(e) => setState(e.target.value)}
                         placeholder='State'
                         required
                     />
-                    <input type="text"
+                    <input id='input-country' type="text"
                         className="country"
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}
                         placeholder='Country'
                         required
                     />
-                    <input type="text"
+                    <input id='input-name' type="text"
                         className="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder='Name'
                         required
                     />
-                    <input type="text"
+                    <input id='input-description' type="text"
                         className="description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder='Description'
                         required
                     />
-                    <input type="number"
+                    <input id='input-price' type="number"
                         className="price"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                         placeholder='Price'
                         required
                     />
-                    <input 
-                    type='url'
-                    className="preview-image"
-                    placeholder="Input Preview Image URL"
-                    value={previewImageUrl}
-                    onChange={(e) => setPreviewImageUrl(e.target.value)}
-                    required
+                    <input id='input-preview-img'
+                        type='url'
+                        className="preview-image"
+                        placeholder="Preview Image URL"
+                        value={previewImageUrl}
+                        onChange={(e) => setPreviewImageUrl(e.target.value)}
+                        required
                     />
 
-                    <button className="submit-edit" type="submit">Create New Spot</button>
+                    <button className="submit-new-spot" type="submit">Submit</button>
                 </form>
             </div>
         </div>

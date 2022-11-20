@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createReviewThunk } from "../../store/reviews";
 import { useParams } from "react-router-dom";
-// import './editReview.css'
+import './CreateReview.css'
 
 const CreateReview = () => {
     const dispatch = useDispatch()
@@ -22,11 +22,10 @@ const CreateReview = () => {
         e.preventDefault()
         const payload = { review, stars }
         let newReview = await dispatch(createReviewThunk(payload, spotId))
-        
-        .catch(async (response) => {
-            const data = await response.json()
-            if (data && data.errors) setErrors(data.errors)
-        })
+            .catch(async (response) => {
+                const data = await response.json()
+                if (data && data.errors) setErrors(data.errors)
+            })
         if (newReview) history.push(`/spots/${spotId}`)
     }
 
@@ -36,34 +35,34 @@ const CreateReview = () => {
             </div>
             <div className="form area">
                 <form className="new-review-form" onSubmit={handleSubmit}>
-                   <ul>
+                    <ul>
                         {errors.map((error, index) => (
                             <li className="all-errors" key={index}>{error}</li>
                         ))}
                     </ul>
-                    <div className='review-form-title'>Review Your Stay</div>
+                    <div className='review-form-title'>{`How was your stay, ${user.firstName}?`}</div>
                     <input type="text"
                         className="review-content"
                         value={review}
                         onChange={(e) => setReview(e.target.value)}
-                        placeholder={`How was your stay, ${user.firstName}?`}
+                        placeholder='Leave your thoughts here!'
                         required
                     />
                     <label className='review-stars'>
-                        Stars        
-                    <select 
-                        value={stars}
-                        onChange={(e) => setStars(e.target.value)}
+                        {`Stars `}
+                        <select
+                            value={stars}
+                            onChange={(e) => setStars(e.target.value)}
                         >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-              </label>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </label>
 
-                    <button className="submit-review" type="submit">Submit Review</button>
+                    <button className="submit-review" type="submit">Submit</button>
                 </form>
             </div>
         </div>

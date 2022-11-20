@@ -12,7 +12,7 @@ const SpotDesign = ({spot}) => {
 
                         <div className='location-stars'>
                             <div className='location-text'>{spot.city}, {spot.state}</div>
-                            <div className='avg-rating'><i class="fa-sharp fa-solid fa-star"></i>{spot.avgRating}</div>
+                            <div className='avg-rating'><i class="fa-sharp fa-solid fa-star"></i>{Math.round(spot.avgRating)}</div>
                         </div>
 
                         <div className='spot-name'>{spot.name}</div>

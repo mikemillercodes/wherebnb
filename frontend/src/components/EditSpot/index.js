@@ -49,8 +49,8 @@ const EditSpot = () => {
 
     return (
         <div className="edit-spot-page">
-            <div className="outer">
-                <span className="Form Title">Update Spot Details</span>
+            <div className="edit-form-title">
+                Did something change with your listing? Update below.
             </div>
             <div className="form area">
 
@@ -103,14 +103,14 @@ const EditSpot = () => {
                         placeholder='Description'
                         required
                     />
-                    <input type="text"
-                        className="price"
+                    <input type="number"
+                        className="price2"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                         placeholder='Price'
                         required
                     />
-                    <button className="submit-edit" type="submit">Update Details</button>
+                    <button className="submit-edit" type="submit">Submit</button>
                 </form>
             </div>
         </div>

@@ -18,13 +18,13 @@ function LoginForm({ setShowModal }) {
     e.preventDefault();
     setErrors([]);
     return dispatch(sessionActions.login({ credential, password }))
-    .then(() => setShowModal(false))
-    .catch(
-      async (res) => {
-        const data = await res.json();
-        if (data.message) setErrors([data.message]);
-      }
-    );
+      .then(() => setShowModal(false))
+      .catch(
+        async (res) => {
+          const data = await res.json();
+          if (data.message) setErrors([data.message]);
+        }
+      );
   };
 
   return (
@@ -35,28 +35,33 @@ function LoginForm({ setShowModal }) {
         ))}
       </ul>
       <label className="username-email-label">
-        Username or Email
         <input className="username-email"
           type="text"
           value={credential}
           onChange={(e) => setCredential(e.target.value)}
           required
+          placeholder="Username or Email"
         />
       </label>
       <label className="password-label">
-        Password
         <input className="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          placeholder="Password"
         />
       </label>
-    
 
-      <button id='login-button' type="submit">Log In</button>
-      
-      <button id='demo-user-button' onClick={handleDemo}>Demo User</button>
+      <div className="modal=buttons">
+        <div className="modal-login-button">
+          <button id='login-button' type="submit">Log In</button>
+
+        </div>
+        <div className="modal-demo-button">
+          <button id='demo-user-button' onClick={handleDemo}>Demo User</button>
+        </div>
+      </div>
     </form>
   );
 }

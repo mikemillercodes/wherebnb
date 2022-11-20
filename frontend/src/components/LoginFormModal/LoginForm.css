@@ -1,3 +1,8 @@
+form {
+    margin-top: 30px;
+    font-family: 'Roboto-flex';
+}
+
 #login-button {
     background-color: rgb(255,90,95);
     border: none;
@@ -9,6 +14,7 @@
     border-radius: 16px;
     cursor: pointer;
     font-size: 13px;
+    width: 150px;
 }
 
 #demo-user-button {
@@ -21,14 +27,14 @@
     cursor: pointer;
     margin-bottom: 35px;
     font-size: 13px;
-
+    width: 150px;
 }
 
 #nav-login {
     background-color: rgb(255,90,95);
     border: none;
     color: white;   
-    font-family: 'Roboto';
+    width: 5px;
 }
 
 .username-email {
@@ -38,8 +44,6 @@
     border: 1px solid grey;
     margin-top: 5px;
     margin-bottom: 5px;
-    margin-left: 15px;
-    font-family: 'Roboto';
     height: 12px;
     font-size: 13px;
 }
@@ -50,12 +54,10 @@
     border-radius: 6px;
     border: 1px solid grey;
     margin-top: 5px;
-    margin-left: 68px;
-    font-family: 'Roboto';
     height: 12px;
 }
 
 .username-email-label, .password-label {
-    font-family: 'Roboto';
     font-size: 13px;
 }
+
