@@ -37,27 +37,30 @@ function Navigation({ isLoaded }) {
   //   }
 
   return (
-    <ul>
-      <div className='navigation-bar-left'>
-        <div className='Home'>
-          <div className='home-button'>
-            <button id='redir-home' onClick={() => redirectHome()}><img className='logo' alt='alt' src={Logo}></img></button>
-          </div>
-        </div>
-        <div className='become-host-button'>
-          <button id='redir-create-spot' onClick={() => redirectCreateSpot()}>Wherebnb your home</button>
-        </div>
-        {isLoaded && (<ProfileButton
-          user={sessionUser}
-          setLogin={setLogin}
-          setShowModal={setShowModal}
-        />
-        )}
-        {showModal && <Modal onClose={() => setShowModal(false)}>
-          {login ? <LoginForm setShowModal={setShowModal} /> : <SignupFormPage setShowModal={setShowModal} />}
-        </Modal>}
+
+    <div className='navigation-bar'>
+      <div className='home-button'>
+        <button id='redir-home' onClick={() => redirectHome()}><img className='logo' alt='alt' src={Logo}></img></button>
       </div>
-    </ul>
+      <div className='right-side'>
+        <div className='become-host-button'>
+          <button id='redir-create-spot' onClick={() => redirectCreateSpot()}>Ready to Wherebnb it?</button>
+        </div>
+        <div className='menu-button'>
+          {isLoaded && (<ProfileButton
+            user={sessionUser}
+            setLogin={setLogin}
+            setShowModal={setShowModal}
+          />
+          )}
+          {showModal && <Modal onClose={() => setShowModal(false)}>
+            {login ? <LoginForm setShowModal={setShowModal} /> : <SignupFormPage setShowModal={setShowModal} />}
+          </Modal>}
+        </div>
+      </div>
+    </div>
+
+
   );
 }
 

@@ -1,6 +1,13 @@
 .review-form-title {
     margin-bottom: 10px;
     text-align: left;
+    /* margin-right: 185px; */
+}
+
+.new-review-form {
+   border-top: 1px solid rgb(128, 128, 128, 0.1);
+   margin-top: -1px;
+   border-width: 100%;
 }
 
 .review-content {
@@ -10,13 +17,13 @@
     height: 100px;
     padding-left: 7px;
     margin-bottom: 5px;   
-    text-align: top;
+    text-align: center;
 }
 
 .review-stars {
     width: 350px;
     margin-bottom: 5px;   
-    text-align: top;
+    text-align: center;
 }
 
 .submit-review {

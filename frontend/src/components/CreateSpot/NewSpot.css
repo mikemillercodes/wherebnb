@@ -1,6 +1,6 @@
 .new-spot-page {
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
     align-items: center;
     text-align: center;
 }
@@ -38,6 +38,8 @@
 
 .title {
     margin-bottom: -25px;
+    border-top: 1px solid rgb(128, 128, 128, 0.3);
+    padding-top: 20px;
 }
 
 .submit-new-spot {

@@ -27,6 +27,8 @@ const OneSpot = () => {
     const previewImage = oneSpot.SpotImages.find(image => image.preview === true);
 
     return (
+        <div className='page'>
+
         <div className='outer-div'>
             <div className='spot-details'>
                 <div className='spot-headline'>{oneSpot.name}</div>
@@ -81,6 +83,7 @@ const OneSpot = () => {
 
             </div>
 
+        </div>
         </div>
     )
 }

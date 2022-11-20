@@ -88,7 +88,7 @@ function SignupFormPage({ setShowModal }) {
             placeholder="Confirm Password"
           />
         </label>
-        <button id='signup-button' type="submit">Sign Up</button>
+        <button id='signup-button2' type="submit">Sign Up</button>
       </div>
     </form>
   );

@@ -65,7 +65,10 @@
   border-bottom-right-radius: 10px;
 } */
 
-
+.page {
+  border-top: 1px solid rgb(128, 128, 128, 0.3);
+  
+}
 .entire-house {
   white-space: nowrap;
   font-size: 20px;
@@ -82,6 +85,7 @@
 .spot-headline {
   text-align: left;
   font-size: 24px;
+  padding-top: 20px;
 }
 
 /* .spot-images> :first-child {
