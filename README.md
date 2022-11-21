@@ -1,6 +1,6 @@
 # API-project
 
-# `AirBnB Backend Clone`
+# `Wherebnb`
 
 ## Database Schema Design
 
