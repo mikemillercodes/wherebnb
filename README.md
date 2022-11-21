@@ -1,6 +1,12 @@
-# API-project
+# Wherebnb
 
 # `Wherebnb`
+
+## Intro
+
+Thanks for visiting the Wherebnb project page! I've created the frontend and backend for a clone of Airbnb.com. 
+
+I hope you enjoy playing around with the site and experiencing the functionality. In order to authenticate and gain full feature access, first create an account with the 'sign up' option. Then, you'll be able to create a spot, edit that spot, delete that spot, and review other users' spots. You'll also be able to edit and delete reviews you leave. It is meant to be intuitive but please reach out with any questions.
 
 ## Database Schema Design
 
