@@ -19,7 +19,8 @@ const SpotDesign = ({spot}) => {
                     </div>
                 </div>
                 <div className='spot-bottom'>
-                    <div className='spot-price'>{`$${spot.price}`}<span style={{opacity: 0.7}}> night</span></div>
+                    <div className='spot-price'>{`$${spot.price}`}<span style={{opacity: 0.7}}> 
+                    <span id='night'> night</span></span></div>
                 </div>
             </div>
         </Link>

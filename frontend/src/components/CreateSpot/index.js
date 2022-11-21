@@ -113,6 +113,7 @@ const CreateSpot = () => {
                         onChange={(e) => setPrice(e.target.value)}
                         placeholder='Price'
                         required
+                        min='0'
                     />
                     <input id='input-preview-img'
                         type='url'

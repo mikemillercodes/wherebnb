@@ -11,7 +11,6 @@ const SpotReviews = () => {
     const history = useHistory()
 
     const reviews = useSelector(state => Object.values(state.reviews))
-    console.log('reviews: ', reviews)
     const user = useSelector(state => state.session.user)   
 
     let spotReviews = []
@@ -20,8 +19,6 @@ const SpotReviews = () => {
         review.createdAt = new Date(review.createdAt).toLocaleDateString()
         if (review.spotId === +spotId) spotReviews.push(review)
     }
-
-    console.log('spot reviews: ', spotReviews)
 
     const userReviewedSpot = () => {
         for (let i = 0; i < spotReviews.length; i++) {
@@ -50,6 +47,9 @@ const SpotReviews = () => {
             </div>
             {user && userReviewedSpot() && <button id='delete-review' onClick={() => {
                 const deleteDispatch = dispatch(deleteReviewThunk(userReviewedSpot()))
+
+                dispatch(getSpotReviewsThunk(spotId))
+
                 if (deleteDispatch) history.push(`/spots/${spotId}`);
             }}>Delete your review</button>}
 

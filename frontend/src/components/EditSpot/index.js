@@ -109,6 +109,7 @@ const EditSpot = () => {
                         onChange={(e) => setPrice(e.target.value)}
                         placeholder='Price'
                         required
+                        min='0'
                     />
                     <button className="submit-edit" type="submit">Submit</button>
                 </form>

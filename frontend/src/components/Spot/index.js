@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import { getSpotReviewsThunk } from '../../store/reviews';
 import { getOneSpotThunk } from '../../store/spots';
 import { deleteSpotThunk } from '../../store/spots';
 import SpotReviews from '../Reviews';
@@ -15,9 +16,16 @@ const OneSpot = () => {
 
     const history = useHistory()
 
+    const spotReviews = useSelector(state => state.reviews)
+
     useEffect(() => {
         dispatch(getOneSpotThunk(spotId))
     }, [dispatch, spotId])
+
+    // useEffect(() => {
+    //     dispatch(getSpotReviewsThunk(spotId))
+    // }, [dispatch, spotId, spotReviews])
+
 
     if (!oneSpot) return null;
 
@@ -34,8 +42,6 @@ const OneSpot = () => {
                 <div className='spot-headline'>{oneSpot.name}</div>
                 <div className='review-data'>
                     <i class='fa-sharp fa-solid fa-star'></i>{`${Math.round(oneSpot.avgStarRating)} `}
-                    ∙
-                    {` ${oneSpot.numReviews} reviews`}
                     ∙
                     {` ${oneSpot.city}, ${oneSpot.state}, ${oneSpot.country}`}
 
@@ -72,8 +78,6 @@ const OneSpot = () => {
                 <div className='single-spot-reviews'>
                     <div className='review-data2'>
                         <i class='fa-sharp fa-solid fa-star'></i>{`${Math.round(oneSpot.avgStarRating)} `}
-                        ∙
-                        {` ${oneSpot.numReviews} reviews`}
                         {user && user.id !== oneSpot.ownerId && <button id='review-your-stay' onClick={() => {
                             history.push(`/spots/${spotId}/reviewyourstay`)
                         }}>Review your stay</button>}

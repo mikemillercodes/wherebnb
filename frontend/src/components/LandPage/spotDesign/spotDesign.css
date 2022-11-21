@@ -57,6 +57,9 @@
     /* opacity: 65%; */
 }
 
+#night {
+    font-weight: lighter;
+}
 .avg-rating {
     text-align: right;
     text-decoration: none;
