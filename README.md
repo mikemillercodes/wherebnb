@@ -4,7 +4,7 @@
 
 ## Database Schema Design
 
-![Database Schema](database_schema.png)
+https://github.com/mikemillercodes/API-project/blob/main/airbnb_dbdiagram.png
 
 ## API Documentation
 
