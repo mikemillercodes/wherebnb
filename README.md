@@ -12,6 +12,12 @@ I hope you enjoy playing around with the site and experiencing the functionality
 
 https://github.com/mikemillercodes/API-project/blob/main/airbnb_dbdiagram.png
 
+## Redux State
+https://github.com/mikemillercodes/API-project/wiki/Redux-State
+
+## Additional Infomation (Wiki)
+https://github.com/mikemillercodes/API-project/wiki
+
 ## API Documentation
 
 ## USER AUTHENTICATION/AUTHORIZATION
