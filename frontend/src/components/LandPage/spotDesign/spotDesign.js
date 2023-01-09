@@ -1,7 +1,7 @@
 import './spotDesign.css';
 import { Link } from 'react-router-dom';
 
-const SpotDesign = ({spot}) => {
+const SpotDesign = ({ spot }) => {
     return (
         <Link className='outer-link' to={`spots/${spot.id}`}>
             <script src="https://kit.fontawesome.com/fb97bfcf0f.js" crossorigin="anonymous"></script>
@@ -19,8 +19,10 @@ const SpotDesign = ({spot}) => {
                     </div>
                 </div>
                 <div className='spot-bottom'>
-                    <div className='spot-price'>{`$${spot.price}`}<span style={{opacity: 0.7}}> 
-                    <span id='night'> night</span></span></div>
+                    <div className='spot-price'>{`$${spot.price}`}<span style={{ opacity: 0.7 }}>
+                        <span id='night'> night</span>
+                    </span>
+                    </div>
                 </div>
             </div>
         </Link>
