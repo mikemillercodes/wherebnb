@@ -39,8 +39,10 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 
 // Get all Reviews of the Current User
 router.get('/current', requireAuth, async (req, res, next) => {
+    // initialize userId variable by keying into the request object
     const userId = req.user.id
 
+    // eager load all review information pertaining to the current user
     const allUserReviews = await Review.findAll({
         include: [
             {
@@ -61,8 +63,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
         group: ['Review.id', 'User.id', 'ReviewImages.id', 'Spot.id']
     })
 
+    // initalize empty "result" array to store response body in JSON format
     const result = []
 
+    // iterate through individual user reviews
+    // extract and mutate queried data to exactly match the API documentation response body format
     for (let review of allUserReviews) {
         review = review.toJSON()
         let spot = review.Spot
@@ -73,6 +78,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
                 preview: true
             }
         })
+        // add and remove wanted/unwanted fields to match API documentation
         spot.previewImage = spotImage.url
         delete spot.description
         delete spot.createdAt
@@ -80,7 +86,9 @@ router.get('/current', requireAuth, async (req, res, next) => {
         delete review.Spot
         review.Spot = spot
 
-        if (review.userId === userId) result.push(review)
+        // if the logged in user left the review, include it in the response body
+        // if (review.userId === userId) 
+        result.push(review)
     }
 
     res.json({ Reviews: result })
